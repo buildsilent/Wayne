@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Vayne — Security Audit + EU AI Act Compliance</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--gold:#c9a84c;--red:#c94a2a;--green:#4a9a6a;--bg:#08080a;--bg2:#0d0d10;--border:#1e1e26;--border2:#2a2a36;--text:#e8e4f0;--muted:#8a8a9a;--dim:#3a3a4a}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{background:var(--bg);font-family:'Barlow',sans-serif;color:var(--text);overflow-x:hidden}
+nav{padding:1.25rem 1.5rem;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);position:sticky;top:0;background:rgba(8,8,10,0.96);backdrop-filter:blur(10px);z-index:50}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:clamp(24px,5vw,32px);letter-spacing:6px;color:var(--gold)}
+.nav-cta{padding:10px 20px;background:var(--gold);color:#0a0a0a;font-size:clamp(12px,3vw,14px);font-weight:700;letter-spacing:2px;text-transform:uppercase;border:none;cursor:pointer;text-decoration:none;display:inline-block}
+.hero{padding:clamp(3rem,8vw,6rem) 1.5rem clamp(2rem,5vw,4rem);text-align:center;max-width:800px;margin:0 auto}
+.hero-tag{font-size:clamp(10px,2.5vw,12px);letter-spacing:5px;color:var(--gold);text-transform:uppercase;font-weight:600;margin-bottom:1.5rem;display:inline-block;border:1px solid rgba(201,168,76,0.3);padding:6px 16px}
+h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(42px,10vw,88px);line-height:0.95;letter-spacing:2px;margin-bottom:1.5rem}
+h1 span{color:var(--gold)}
+.hero p{font-size:clamp(16px,4vw,20px);color:var(--muted);line-height:1.7;max-width:560px;margin:0 auto 2rem}
+.hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn-p{padding:16px 32px;background:var(--gold);color:#0a0a0a;font-size:clamp(13px,3vw,15px);font-weight:700;letter-spacing:2px;text-transform:uppercase;border:none;cursor:pointer;text-decoration:none;display:inline-block}
+.btn-s{padding:16px 32px;background:transparent;color:var(--text);font-size:clamp(13px,3vw,15px);font-weight:600;letter-spacing:2px;text-transform:uppercase;border:1px solid var(--border2);cursor:pointer;text-decoration:none;display:inline-block}
+.deadline{background:#1a0a08;border-top:1px solid #3a1a15;border-bottom:1px solid #3a1a15;padding:1rem 1.5rem;text-align:center}
+.deadline p{font-size:clamp(13px,3.2vw,15px);color:#e87060;font-weight:600}
+.deadline span{color:#fff}
+section{padding:clamp(3rem,7vw,5rem) 1.5rem;max-width:900px;margin:0 auto}
+.stag{font-size:clamp(10px,2.5vw,11px);letter-spacing:4px;color:var(--gold);text-transform:uppercase;font-weight:600;margin-bottom:1rem}
+.stitle{font-family:'Bebas Neue',sans-serif;font-size:clamp(32px,7vw,56px);line-height:1;margin-bottom:1.25rem}
+.sbody{font-size:clamp(15px,3.8vw,17px);color:var(--muted);line-height:1.75;max-width:600px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:2rem}
+.card{background:var(--bg2);border:1px solid var(--border);padding:1.5rem}
+.card.hl{border-color:rgba(201,74,42,0.4);background:#0d0808}
+.card-icon{font-size:clamp(22px,5vw,28px);margin-bottom:0.75rem}
+.card-title{font-size:clamp(15px,3.8vw,17px);font-weight:700;margin-bottom:0.5rem}
+.card-body{font-size:clamp(13px,3.2vw,14px);color:var(--muted);line-height:1.65}
+.offer{background:var(--bg2);border:1px solid var(--border);padding:clamp(2rem,5vw,3rem);margin-top:2rem;text-align:center}
+.offer-tag{font-size:clamp(10px,2.5vw,11px);letter-spacing:4px;color:var(--red);text-transform:uppercase;font-weight:600;margin-bottom:1rem}
+.price-old{font-size:clamp(16px,4vw,20px);color:var(--dim);text-decoration:line-through;margin-bottom:0.5rem}
+.price{font-family:'Bebas Neue',sans-serif;font-size:clamp(56px,12vw,88px);color:var(--gold);line-height:1;margin-bottom:0.5rem}
+.price-sub{font-size:clamp(13px,3.2vw,15px);color:var(--muted);margin-bottom:2rem}
+.vs{text-align:left;max-width:420px;margin:0 auto 2rem;border-top:1px solid var(--border);padding-top:1.5rem}
+.vi{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:clamp(13px,3.2vw,14px)}
+.vi:last-child{border:none}
+.vi-n{color:var(--muted)}
+.vi-p{font-weight:600}.vi-p.s{color:var(--dim);text-decoration:line-through}
+.vt{display:flex;justify-content:space-between;padding:12px 0 0;font-size:clamp(14px,3.5vw,16px);font-weight:700}
+.vt-p{color:var(--gold)}
+.guar{font-size:clamp(12px,3vw,13px);color:var(--muted);margin-top:1.5rem;padding:1rem;border:1px solid var(--border);background:var(--bg)}
+.steps{display:grid;gap:16px;margin-top:2rem}
+.step{display:flex;gap:1.25rem;align-items:flex-start;background:var(--bg2);border:1px solid var(--border);padding:1.25rem}
+.step-n{font-family:'Bebas Neue',sans-serif;font-size:clamp(28px,6vw,36px);color:var(--gold);line-height:1;flex-shrink:0;width:44px}
+.step-title{font-size:clamp(15px,3.8vw,17px);font-weight:700;margin-bottom:4px}
+.step-body{font-size:clamp(13px,3.2vw,14px);color:var(--muted);line-height:1.6}
+.urgency{background:#0d0808;border:1px solid #3a1515;padding:clamp(2rem,5vw,3rem);margin-top:2rem;text-align:center}
+.urgency h3{font-family:'Bebas Neue',sans-serif;font-size:clamp(28px,6vw,44px);color:var(--red);margin-bottom:1rem}
+.urgency p{font-size:clamp(14px,3.5vw,16px);color:#c8b0b0;line-height:1.7;max-width:520px;margin:0 auto}
+.form-wrap{background:var(--bg2);border:1px solid var(--border);padding:clamp(2rem,5vw,3rem);margin-top:2rem}
+.form-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(28px,6vw,44px);margin-bottom:0.5rem}
+.form-sub{font-size:clamp(14px,3.5vw,16px);color:var(--muted);margin-bottom:2rem;line-height:1.6}
+.fg{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:500px){.fg{grid-template-columns:1fr}}
+.fgroup{display:flex;flex-direction:column;gap:6px}
+.fgroup.full{grid-column:1/-1}
+label{font-size:clamp(10px,2.5vw,11px);letter-spacing:2px;color:var(--dim);text-transform:uppercase;font-weight:600}
+input,select,textarea{background:var(--bg);border:1px solid var(--border2);color:var(--text);font-family:'Barlow',sans-serif;font-size:clamp(15px,3.8vw,16px);padding:12px 14px;width:100%;outline:none}
+input:focus,select:focus,textarea:focus{border-color:var(--gold)}
+select option{background:var(--bg)}
+textarea{min-height:100px;resize:vertical}
+.submit{width:100%;padding:16px;background:var(--gold);color:#0a0a0a;font-family:'Barlow',sans-serif;font-size:clamp(14px,3.5vw,16px);font-weight:700;letter-spacing:3px;text-transform:uppercase;border:none;cursor:pointer;margin-top:8px}
+.form-note{font-size:clamp(11px,2.8vw,12px);color:var(--dim);margin-top:1rem;text-align:center;line-height:1.6}
+.success{display:none;text-align:center;padding:2rem;background:rgba(74,154,106,0.08);border:1px solid rgba(74,154,106,0.3)}
+.success h3{font-family:'Bebas Neue',sans-serif;font-size:clamp(28px,6vw,40px);color:var(--green);margin-bottom:0.75rem}
+.success p{font-size:clamp(14px,3.5vw,16px);color:var(--muted);line-height:1.65}
+footer{border-top:1px solid var(--border);padding:2rem 1.5rem;text-align:center}
+.f-logo{font-family:'Bebas Neue',sans-serif;font-size:clamp(20px,4vw,28px);letter-spacing:6px;color:var(--gold);margin-bottom:0.5rem}
+.f-sub{font-size:clamp(11px,2.8vw,12px);color:var(--dim);letter-spacing:2px;text-transform:uppercase}
+hr{border:none;border-top:1px solid var(--border)}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">VAYNE</div>
+  <a href="#audit" class="nav-cta">Get Audit — $297</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-tag">⚠ EU AI Act Enforcement — August 2, 2026</div>
+  <h1>We Find Your<br><span>Vulnerabilities</span><br>Before They Do.</h1>
+  <p>Infrastructure security audit + EU AI Act compliance gap assessment. Real findings. 48-hour delivery. One flat price.</p>
+  <div class="hero-btns">
+    <a href="#audit" class="btn-p">Request Audit — $297</a>
+    <a href="#process" class="btn-s">See How It Works</a>
+  </div>
+</div>
+
+<div class="deadline">
+  <p id="dlBanner">⏱ <span>138 days</span> until EU AI Act full enforcement. Fines up to <span>€35M or 7% of global revenue.</span></p>
+</div>
+
+<section>
+  <div class="stag">What We Find</div>
+  <div class="stitle">Real Vulnerabilities.<br>Real Findings.</div>
+  <div class="sbody">6 professional OSINT tools. Full written report. Cross-referenced against EU AI Act Annex III requirements. Not a template — actual findings from your infrastructure.</div>
+  <div class="grid">
+    <div class="card hl"><div class="card-icon">⚠</div><div class="card-title">Security Header Gaps</div><div class="card-body">Missing CSP, X-Content-Type-Options, Permissions-Policy, and Referrer-Policy headers leave your platform open to XSS, MIME-sniffing, and data leakage.</div></div>
+    <div class="card hl"><div class="card-icon">🔐</div><div class="card-title">SSL/TLS Vulnerabilities</div><div class="card-body">Deprecated TLS 1.0/1.1, weak cipher suites, BEAST attack exposure. Grade B SSL means your encryption is already flagged by modern compliance tools.</div></div>
+    <div class="card"><div class="card-icon">🌐</div><div class="card-title">Exposed Infrastructure</div><div class="card-body">Open ports, exposed services, subdomain enumeration via Shodan and DNSDumpster. What attackers see before you know they're looking.</div></div>
+    <div class="card"><div class="card-icon">📋</div><div class="card-title">EU AI Act Compliance Gap</div><div class="card-body">AI in hiring, credit scoring, or user assessment = Annex III high-risk. We assess your documentation, governance, and conformity gaps against the August 2 deadline.</div></div>
+    <div class="card"><div class="card-icon">🔍</div><div class="card-title">Breach History</div><div class="card-body">HaveIBeenPwned domain check. Known CVEs in your tech stack. Past exposure your clients and regulators will find if you don't know about it first.</div></div>
+    <div class="card"><div class="card-icon">🗺</div><div class="card-title">Remediation Roadmap</div><div class="card-body">Every finding includes a clear fix recommendation. Not just what's wrong — exactly what to tell your engineering team to do about it.</div></div>
+  </div>
+</section>
+
+<hr>
+
+<section id="process">
+  <div class="stag">How It Works</div>
+  <div class="stitle">Simple. Fast.<br>No Surprises.</div>
+  <div class="steps">
+    <div class="step"><div class="step-n">01</div><div><div class="step-title">Submit Your Request</div><div class="step-body">Fill out the audit request form. Tell us your domain, company size, and AI use cases.</div></div></div>
+    <div class="step"><div class="step-n">02</div><div><div class="step-title">We Run the Scans</div><div class="step-body">SecurityHeaders, SSL Labs, Shodan, BuiltWith, HaveIBeenPwned, DNSDumpster — six tools, real findings, cross-referenced against EU AI Act Annex III.</div></div></div>
+    <div class="step"><div class="step-n">03</div><div><div class="step-title">48-Hour Delivery</div><div class="step-body">Full written audit report — every finding, its severity, and a complete remediation roadmap. In your inbox within 48 hours of payment.</div></div></div>
+    <div class="step"><div class="step-n">04</div><div><div class="step-title">Act Before August 2</div><div class="step-body">Close your compliance gaps before EU enforcement. Share the report with your engineering and legal teams. Done.</div></div></div>
+  </div>
+</section>
+
+<hr>
+
+<section id="pricing">
+  <div class="stag">Pricing</div>
+  <div class="stitle">One Flat Price.<br>No Hidden Fees.</div>
+  <div class="offer">
+    <div class="offer-tag">Complete Audit Package</div>
+    <div class="price-old">$3,097 retail value</div>
+    <div class="price">$297</div>
+    <div class="price-sub">One-time. 48-hour delivery. No retainer required.</div>
+    <div class="vs">
+      <div class="vi"><span class="vi-n">Infrastructure Security Audit</span><span class="vi-p s">$1,200</span></div>
+      <div class="vi"><span class="vi-n">EU AI Act Compliance Assessment</span><span class="vi-p s">$1,000</span></div>
+      <div class="vi"><span class="vi-n">Remediation Roadmap</span><span class="vi-p s">$600</span></div>
+      <div class="vi"><span class="vi-n">Priority 48hr Delivery</span><span class="vi-p s">$297</span></div>
+      <div class="vt"><span>You Pay</span><span class="vt-p">$297</span></div>
+    </div>
+    <a href="#audit" class="btn-p" style="display:block;max-width:320px;margin:0 auto;text-align:center">Request Your Audit Now</a>
+    <div class="guar">🛡 If we don't find at least 3 actionable security or compliance findings, you pay nothing.</div>
+  </div>
+</section>
+
+<section>
+  <div class="urgency">
+    <h3>138 Days Left.<br>Are You Ready?</h3>
+    <p>August 2, 2026 — full EU AI Act enforcement begins. Companies using AI in hiring, credit scoring, or user assessments that can't demonstrate compliance face fines up to €35 million or 7% of global annual revenue. Big 4 consultants charge $50K+ for this. We charge $297 and deliver in 48 hours.</p>
+  </div>
+</section>
+
+<section id="audit">
+  <div class="form-wrap">
+    <div class="form-title">Request Your Audit</div>
+    <div class="form-sub">Fill out the form. We'll send payment instructions within 4 hours. Audit delivered within 48 hours of payment.</div>
+    <form id="auditForm" onsubmit="submitForm(event)">
+      <div class="fg">
+        <div class="fgroup"><label>First Name</label><input type="text" name="firstName" placeholder="First name" required/></div>
+        <div class="fgroup"><label>Last Name</label><input type="text" name="lastName" placeholder="Last name" required/></div>
+        <div class="fgroup full"><label>Company Name</label><input type="text" name="company" placeholder="Your company" required/></div>
+        <div class="fgroup full"><label>Work Email</label><input type="email" name="email" placeholder="you@company.com" required/></div>
+        <div class="fgroup full"><label>Website Domain</label><input type="text" name="domain" placeholder="company.com" required/></div>
+        <div class="fgroup full"><label>Company Size</label>
+          <select name="size" required>
+            <option value="">Select...</option>
+            <option>1–10 employees</option>
+            <option>11–50 employees</option>
+            <option>51–200 employees</option>
+            <option>201–500 employees</option>
+            <option>500+ employees</option>
+          </select>
+        </div>
+        <div class="fgroup full"><label>Primary AI Use Case</label>
+          <select name="aiUse" required>
+            <option value="">Select...</option>
+            <option>Hiring / Recruitment</option>
+            <option>Credit Scoring / Financial Decisions</option>
+            <option>Customer Assessment / Scoring</option>
+            <option>HR / Employee Management</option>
+            <option>Content Generation</option>
+            <option>Other AI Features</option>
+            <option>No AI features currently</option>
+          </select>
+        </div>
+        <div class="fgroup full"><label>Additional Notes (optional)</label><textarea name="notes" placeholder="Any specific concerns or areas to focus on..."></textarea></div>
+      </div>
+      <button type="submit" class="submit">Submit Audit Request →</button>
+      <div class="form-note">Payment instructions sent within 4 hours. Audit delivered within 48 hours of payment.</div>
+    </form>
+    <div class="success" id="successMsg">
+      <h3>Request Received.</h3>
+      <p>We'll send payment instructions to your email within 4 hours. Audit delivered within 48 hours of payment confirmation.<br><br>— Vayne, Build Silent LLC</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="f-logo">VAYNE</div>
+  <div class="f-sub">Security Audit + EU AI Act Compliance · Build Silent LLC · Wyoming</div>
+</footer>
+
+<script>
+function updateDL(){
+  const diff=new Date('2026-08-02T00:00:00')-new Date();
+  if(diff>0){
+    const d=Math.floor(diff/86400000);
+    document.getElementById('dlBanner').innerHTML=`⏱ <span>${d} days</span> until EU AI Act full enforcement. Fines up to <span>€35M or 7% of global revenue.</span>`;
+  }
+}
+updateDL();setInterval(updateDL,60000);
+
+function submitForm(e){
+  e.preventDefault();
+  const data=Object.fromEntries(new FormData(document.getElementById('auditForm')));
+  const submissions=JSON.parse(localStorage.getItem('vayne_leads')||'[]');
+  submissions.push({...data,ts:new Date().toISOString()});
+  localStorage.setItem('vayne_leads',JSON.stringify(submissions));
+  document.getElementById('auditForm').style.display='none';
+  document.getElementById('successMsg').style.display='block';
+}
+
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    e.preventDefault();
+    const el=document.querySelector(a.getAttribute('href'));
+    if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+});
+</script>
+</body>
+</html>
