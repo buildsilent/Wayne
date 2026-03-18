@@ -2,273 +2,259 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>Vayne — Your Infrastructure Is Already Exposed</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vayne — Security + EU AI Act Compliance</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{
-  --white:#fff;
-  --page:#f5f5f7;
-  --text1:#1d1d1f;
-  --text2:#6e6e73;
-  --text3:#a1a1a6;
-  --blue:#0066cc;
-  --blue-l:#e8f2ff;
-  --red:#ff3b30;
-  --red-l:#fff0ef;
-  --green:#34c759;
-  --green-l:#edfaf1;
-  --gold:#b8860b;
-  --gold-l:#fdf8ee;
-  --line:#d2d2d7;
-  --line2:#e8e8ed;
-  --r12:12px;--r16:16px;--r20:20px;
-}
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html{-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
-body{background:var(--white);font-family:'Inter',-apple-system,sans-serif;color:var(--text1);overflow-x:hidden}
+body{background:#fff;font-family:'Inter',-apple-system,sans-serif;color:#1d1d1f;overflow-x:hidden}
+
+/* TICKER — always visible, top of page */
+.ticker{background:#1d1d1f;padding:10px 20px;display:flex;align-items:center;justify-content:center;gap:12px;position:sticky;top:0;z-index:100}
+.ticker-dot{width:7px;height:7px;border-radius:50%;background:#ff3b30;animation:td 1.2s infinite;flex-shrink:0}
+@keyframes td{0%,100%{opacity:1}50%{opacity:0.2}}
+.ticker-text{font-size:clamp(11px,2.8vw,13px);color:#fff;font-weight:600;letter-spacing:-0.1px}
+.ticker-time{font-size:clamp(13px,3.2vw,15px);color:#ff3b30;font-weight:800;font-variant-numeric:tabular-nums;letter-spacing:-0.5px}
+.ticker-fine{font-size:clamp(10px,2.5vw,12px);color:rgba(255,255,255,0.45);font-weight:400;display:none}
+@media(min-width:480px){.ticker-fine{display:block}}
 
 /* NAV */
-nav{background:rgba(255,255,255,0.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--line2);padding:0 1.5rem;height:52px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
-.nav-logo{font-size:18px;font-weight:800;color:var(--text1);letter-spacing:-0.5px}
-.nav-cta{padding:8px 18px;background:var(--blue);color:white;font-size:13px;font-weight:600;letter-spacing:-0.2px;border:none;cursor:pointer;border-radius:100px;text-decoration:none;display:inline-block;transition:background 0.2s}
-.nav-cta:hover{background:#0077ed}
+nav{padding:0 1.5rem;height:56px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #f0f0f0}
+.nav-logo{font-size:20px;font-weight:800;color:#1d1d1f;letter-spacing:-0.5px}
+.nav-btn{padding:10px 20px;background:#1d1d1f;color:#fff;font-size:13px;font-weight:600;border:none;cursor:pointer;border-radius:100px;text-decoration:none;display:inline-block;letter-spacing:-0.1px;transition:opacity 0.2s}
+.nav-btn:hover{opacity:0.8}
 
 /* HERO */
-.hero{background:linear-gradient(180deg,#f0f7ff 0%,var(--white) 100%);padding:4rem 1.5rem 3rem;text-align:center;border-bottom:1px solid var(--line2)}
-.hero-pill{display:inline-flex;align-items:center;gap:6px;background:var(--red-l);border:1px solid rgba(255,59,48,0.2);border-radius:100px;padding:5px 14px;font-size:12px;font-weight:600;color:var(--red);letter-spacing:0.3px;margin-bottom:1.5rem}
-.hero-pill-dot{width:6px;height:6px;border-radius:50%;background:var(--red);animation:rp 1.5s infinite}
-@keyframes rp{0%,100%{opacity:1}50%{opacity:0.3}}
-.hero h1{font-size:clamp(36px,8vw,68px);font-weight:800;letter-spacing:-2.5px;color:var(--text1);line-height:1.0;margin-bottom:1.25rem}
-.hero h1 em{font-style:normal;color:var(--blue)}
-.hero-sub{font-size:clamp(16px,4vw,20px);color:var(--text2);font-weight:400;line-height:1.6;max-width:520px;margin:0 auto 2rem;letter-spacing:-0.3px}
-.hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-.btn-primary{padding:14px 28px;background:var(--blue);color:white;font-size:clamp(14px,3.5vw,16px);font-weight:600;border:none;cursor:pointer;border-radius:100px;text-decoration:none;display:inline-block;letter-spacing:-0.2px;transition:all 0.2s}
-.btn-primary:hover{background:#0077ed;transform:scale(1.02)}
-.btn-secondary{padding:14px 28px;background:transparent;color:var(--text1);font-size:clamp(14px,3.5vw,16px);font-weight:600;border:1px solid var(--line);cursor:pointer;border-radius:100px;text-decoration:none;display:inline-block;letter-spacing:-0.2px;transition:all 0.2s}
-.btn-secondary:hover{border-color:var(--blue);color:var(--blue)}
+.hero{padding:clamp(3rem,8vw,5rem) 1.5rem clamp(2rem,5vw,3rem);text-align:center;max-width:720px;margin:0 auto}
+.hero-label{display:inline-block;background:#fff0ef;color:#ff3b30;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:5px 14px;border-radius:100px;margin-bottom:1.5rem}
+.hero h1{font-size:clamp(34px,8vw,64px);font-weight:800;letter-spacing:-2.5px;line-height:1.0;color:#1d1d1f;margin-bottom:1.25rem}
+.hero h1 span{color:#0066cc}
+.hero-outcome{font-size:clamp(16px,4vw,22px);color:#6e6e73;font-weight:400;line-height:1.6;max-width:540px;margin:0 auto 2rem;letter-spacing:-0.3px}
+.hero-cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn-dark{padding:15px 30px;background:#1d1d1f;color:#fff;font-size:clamp(14px,3.5vw,16px);font-weight:700;border:none;cursor:pointer;border-radius:100px;text-decoration:none;display:inline-block;letter-spacing:-0.2px;transition:opacity 0.2s}
+.btn-dark:hover{opacity:0.85}
+.btn-ghost{padding:15px 30px;background:transparent;color:#1d1d1f;font-size:clamp(14px,3.5vw,16px);font-weight:600;border:1.5px solid #d2d2d7;cursor:pointer;border-radius:100px;text-decoration:none;display:inline-block;letter-spacing:-0.2px;transition:all 0.2s}
+.btn-ghost:hover{border-color:#1d1d1f}
 
-/* DEADLINE TICKER */
-.ticker{background:var(--red-l);border-top:1px solid rgba(255,59,48,0.15);border-bottom:1px solid rgba(255,59,48,0.15);padding:0.85rem 1.5rem;text-align:center}
-.ticker p{font-size:clamp(13px,3.2vw,15px);color:var(--red);font-weight:600;letter-spacing:-0.2px}
-.ticker span{color:var(--text1)}
+/* DIVIDER */
+hr{border:none;border-top:1px solid #f0f0f0}
 
-/* TRUST BAR */
-.trust{background:var(--page);border-bottom:1px solid var(--line2);padding:1rem 1.5rem;display:flex;justify-content:center;align-items:center;gap:2rem;flex-wrap:wrap}
-.trust-item{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--text2);font-weight:500;letter-spacing:-0.1px}
-.trust-icon{color:var(--green);font-size:14px;font-weight:700}
+/* OUTCOMES — what they actually get */
+.outcomes-section{padding:clamp(2rem,5vw,4rem) 1.5rem;max-width:900px;margin:0 auto}
+.outcomes-eyebrow{font-size:12px;font-weight:700;letter-spacing:1.5px;color:#0066cc;text-transform:uppercase;text-align:center;margin-bottom:10px}
+.outcomes-title{font-size:clamp(26px,6vw,44px);font-weight:800;letter-spacing:-1.5px;color:#1d1d1f;text-align:center;line-height:1.05;margin-bottom:clamp(1.5rem,4vw,3rem)}
+.outcomes-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.outcome{background:#f5f5f7;border-radius:18px;padding:1.5rem}
+.outcome-num{font-size:clamp(36px,8vw,48px);font-weight:800;color:#e8e8ed;letter-spacing:-2px;line-height:1;margin-bottom:10px;font-variant-numeric:tabular-nums}
+.outcome-title{font-size:clamp(15px,3.8vw,17px);font-weight:700;color:#1d1d1f;margin-bottom:6px;letter-spacing:-0.3px;line-height:1.3}
+.outcome-body{font-size:clamp(13px,3.2vw,14px);color:#6e6e73;line-height:1.65}
 
-/* SECTION */
-.section{padding:clamp(2.5rem,6vw,4rem) 1.5rem;max-width:900px;margin:0 auto}
-.section-eyebrow{font-size:12px;font-weight:700;letter-spacing:1.5px;color:var(--blue);text-transform:uppercase;margin-bottom:10px}
-.section-title{font-size:clamp(28px,6vw,48px);font-weight:800;letter-spacing:-1.5px;color:var(--text1);line-height:1.05;margin-bottom:1rem}
-.section-body{font-size:clamp(15px,3.8vw,18px);color:var(--text2);line-height:1.7;max-width:580px;letter-spacing:-0.2px}
-
-/* OUTCOME CARDS (what they get, not how) */
-.outcomes{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin-top:2rem}
-.outcome-card{background:var(--page);border-radius:var(--r16);padding:1.25rem;border:1px solid var(--line2);transition:transform 0.2s,box-shadow 0.2s}
-.outcome-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,0.08)}
-.outcome-card.featured{background:var(--blue-l);border-color:rgba(0,102,204,0.25)}
-.outcome-result{font-size:clamp(15px,3.8vw,17px);font-weight:700;color:var(--text1);margin-bottom:6px;letter-spacing:-0.3px;line-height:1.3}
-.outcome-card.featured .outcome-result{color:var(--blue)}
-.outcome-desc{font-size:clamp(13px,3.2vw,14px);color:var(--text2);line-height:1.65;font-weight:400}
-
-/* STEPS */
-.steps{display:grid;gap:14px;margin-top:2rem}
-.step{display:flex;gap:1.25rem;background:var(--page);border-radius:var(--r16);padding:1.25rem;border:1px solid var(--line2);align-items:flex-start}
-.step-num{font-size:clamp(28px,6vw,36px);font-weight:800;color:var(--blue);line-height:1;flex-shrink:0;width:42px;letter-spacing:-1px}
-.step-title{font-size:clamp(15px,3.8vw,17px);font-weight:700;color:var(--text1);letter-spacing:-0.3px;margin-bottom:4px}
-.step-body{font-size:clamp(13px,3.2vw,14px);color:var(--text2);line-height:1.65}
+/* PROOF SECTION */
+.proof-section{background:#f5f5f7;padding:clamp(2rem,5vw,4rem) 1.5rem}
+.proof-inner{max-width:700px;margin:0 auto;text-align:center}
+.proof-title{font-size:clamp(24px,6vw,40px);font-weight:800;letter-spacing:-1.5px;color:#1d1d1f;margin-bottom:1rem;line-height:1.1}
+.proof-body{font-size:clamp(15px,3.8vw,18px);color:#6e6e73;line-height:1.7;margin-bottom:2rem;font-weight:400}
+.proof-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;max-width:500px;margin:0 auto}
+.proof-stat-num{font-size:clamp(28px,7vw,40px);font-weight:800;color:#1d1d1f;letter-spacing:-1.5px;line-height:1}
+.proof-stat-label{font-size:clamp(11px,2.8vw,13px);color:#6e6e73;margin-top:4px;font-weight:500}
 
 /* PRICING */
-.pricing-card{background:var(--page);border-radius:var(--r20);padding:clamp(2rem,5vw,3rem);margin-top:2rem;text-align:center;border:1px solid var(--line2)}
-.price-was{font-size:clamp(15px,3.8vw,18px);color:var(--text3);text-decoration:line-through;margin-bottom:6px;font-weight:400}
-.price-now{font-size:clamp(56px,12vw,88px);font-weight:800;color:var(--text1);line-height:1;letter-spacing:-4px;margin-bottom:4px}
-.price-desc{font-size:clamp(14px,3.5vw,16px);color:var(--text2);margin-bottom:2rem;font-weight:400}
-.value-stack{text-align:left;max-width:400px;margin:0 auto 2rem;border-top:1px solid var(--line2);padding-top:1.5rem}
-.vi{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--line2);font-size:clamp(13px,3.2vw,14px);font-weight:400}
-.vi:last-child{border:none}
-.vi-name{color:var(--text2)}
-.vi-price{color:var(--text3);text-decoration:line-through;font-weight:500}
-.vi-total{display:flex;justify-content:space-between;padding:12px 0 0;font-size:clamp(15px,3.8vw,17px);font-weight:700}
-.vi-total-price{color:var(--blue)}
-.guarantee{font-size:clamp(12px,3vw,13px);color:var(--text2);margin-top:1.5rem;padding:0.85rem 1rem;background:var(--green-l);border-radius:var(--r12);border:1px solid rgba(52,199,89,0.2);font-weight:400;line-height:1.5}
-
-/* URGENCY */
-.urgency-block{background:var(--red-l);border-radius:var(--r20);padding:clamp(2rem,5vw,3rem);margin-top:2rem;text-align:center;border:1px solid rgba(255,59,48,0.15)}
-.urgency-block h3{font-size:clamp(24px,6vw,40px);font-weight:800;color:var(--red);letter-spacing:-1.5px;line-height:1.1;margin-bottom:1rem}
-.urgency-block p{font-size:clamp(14px,3.5vw,16px);color:#8a3030;line-height:1.7;max-width:520px;margin:0 auto;font-weight:400}
+.pricing-section{padding:clamp(2rem,5vw,4rem) 1.5rem;max-width:620px;margin:0 auto;text-align:center}
+.pricing-card{background:#f5f5f7;border-radius:24px;padding:clamp(2rem,5vw,3rem)}
+.price-tag{display:inline-block;background:#fff0ef;color:#ff3b30;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:4px 12px;border-radius:100px;margin-bottom:1rem}
+.price-was{font-size:clamp(14px,3.5vw,16px);color:#a1a1a6;text-decoration:line-through;margin-bottom:4px}
+.price-now{font-size:clamp(60px,14vw,88px);font-weight:800;color:#1d1d1f;letter-spacing:-4px;line-height:1;margin-bottom:4px}
+.price-desc{font-size:clamp(14px,3.5vw,16px);color:#6e6e73;margin-bottom:2rem}
+.price-includes{text-align:left;border-top:1px solid #e8e8ed;padding-top:1.5rem;margin-bottom:2rem}
+.pi{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #e8e8ed;font-size:clamp(13px,3.2vw,14px)}
+.pi:last-child{border:none}
+.pi-name{color:#6e6e73}
+.pi-price{color:#a1a1a6;text-decoration:line-through}
+.pi-total{display:flex;justify-content:space-between;padding:12px 0 0;font-size:clamp(15px,3.8vw,17px);font-weight:700}
+.pi-total-price{color:#0066cc}
+.guarantee{font-size:clamp(12px,3vw,13px);color:#6e6e73;margin-top:1.5rem;padding:12px 16px;background:#fff;border-radius:12px;font-weight:400;line-height:1.5}
 
 /* FORM */
-.form-section{background:var(--page);border-radius:var(--r20);padding:clamp(2rem,5vw,3rem);margin-top:2rem;border:1px solid var(--line2)}
-.form-title{font-size:clamp(24px,6vw,36px);font-weight:800;letter-spacing:-1.5px;color:var(--text1);margin-bottom:6px}
-.form-sub{font-size:clamp(14px,3.5vw,16px);color:var(--text2);margin-bottom:2rem;line-height:1.6;font-weight:400}
-.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-@media(max-width:480px){.form-grid{grid-template-columns:1fr}}
-.fg{display:flex;flex-direction:column;gap:5px}
-.fg.full{grid-column:1/-1}
-label{font-size:11px;font-weight:700;letter-spacing:0.5px;color:var(--text3);text-transform:uppercase}
-input,select,textarea{background:var(--white);border:1px solid var(--line);border-radius:var(--r12);color:var(--text1);font-family:inherit;font-size:clamp(15px,3.8vw,16px);padding:12px 14px;width:100%;outline:none;transition:border-color 0.2s;font-weight:400;-webkit-appearance:none}
-input:focus,select:focus,textarea:focus{border-color:var(--blue)}
-textarea{min-height:90px;resize:vertical;line-height:1.5}
-.submit-btn{width:100%;padding:15px;background:var(--blue);color:white;font-family:inherit;font-size:clamp(15px,3.8vw,16px);font-weight:700;border:none;border-radius:var(--r12);cursor:pointer;margin-top:8px;letter-spacing:-0.2px;transition:background 0.2s}
-.submit-btn:hover{background:#0077ed}
-.submit-btn:active{background:#0055aa}
-.form-note{font-size:12px;color:var(--text3);margin-top:10px;text-align:center;line-height:1.5}
-.success{display:none;text-align:center;padding:2rem;background:var(--green-l);border-radius:var(--r16);border:1px solid rgba(52,199,89,0.3)}
-.success h3{font-size:clamp(24px,6vw,32px);font-weight:800;color:var(--green);letter-spacing:-1px;margin-bottom:8px}
-.success p{font-size:clamp(14px,3.5vw,15px);color:var(--text2);line-height:1.65}
+.form-section{padding:clamp(2rem,5vw,4rem) 1.5rem;max-width:600px;margin:0 auto}
+.form-card{background:#f5f5f7;border-radius:24px;padding:clamp(1.5rem,4vw,2.5rem)}
+.form-title{font-size:clamp(24px,6vw,36px);font-weight:800;letter-spacing:-1.5px;color:#1d1d1f;margin-bottom:6px}
+.form-sub{font-size:clamp(14px,3.5vw,15px);color:#6e6e73;margin-bottom:1.5rem;font-weight:400;line-height:1.55}
+.fg{display:flex;flex-direction:column;gap:5px;margin-bottom:10px}
+label{font-size:10px;font-weight:700;letter-spacing:0.5px;color:#a1a1a6;text-transform:uppercase}
+input,select,textarea{background:#fff;border:1px solid #e8e8ed;border-radius:12px;color:#1d1d1f;font-family:inherit;font-size:clamp(15px,3.8vw,16px);padding:12px 14px;width:100%;outline:none;transition:border-color 0.2s;-webkit-appearance:none;font-weight:400}
+input:focus,select:focus,textarea:focus{border-color:#0066cc}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:480px){.form-row{grid-template-columns:1fr}}
+textarea{min-height:80px;resize:none;line-height:1.5}
+.submit-btn{width:100%;padding:15px;background:#1d1d1f;color:#fff;font-family:inherit;font-size:clamp(15px,3.8vw,16px);font-weight:700;border:none;border-radius:12px;cursor:pointer;margin-top:6px;letter-spacing:-0.2px;transition:opacity 0.2s}
+.submit-btn:hover{opacity:0.85}
+.submit-btn:disabled{opacity:0.5;cursor:not-allowed}
+.form-note{font-size:11px;color:#a1a1a6;margin-top:8px;text-align:center;line-height:1.5}
+.success{display:none;text-align:center;padding:2rem;background:#edfaf1;border-radius:16px;border:1px solid rgba(52,199,89,0.3)}
+.success h3{font-size:clamp(22px,5vw,30px);font-weight:800;color:#1a7a34;letter-spacing:-1px;margin-bottom:8px}
+.success p{font-size:clamp(14px,3.5vw,15px);color:#6e6e73;line-height:1.65}
 
 /* FOOTER */
-footer{border-top:1px solid var(--line2);padding:2rem 1.5rem;text-align:center;background:var(--page)}
-.footer-logo{font-size:20px;font-weight:800;color:var(--text1);letter-spacing:-0.5px;margin-bottom:6px}
-.footer-sub{font-size:12px;color:var(--text3);letter-spacing:0.5px}
-
-hr{border:none;border-top:1px solid var(--line2)}
+footer{border-top:1px solid #f0f0f0;padding:2rem 1.5rem;text-align:center;background:#fff}
+.footer-logo{font-size:18px;font-weight:800;color:#1d1d1f;margin-bottom:5px;letter-spacing:-0.5px}
+.footer-sub{font-size:11px;color:#a1a1a6;letter-spacing:0.3px}
 </style>
 </head>
 <body>
 
+<!-- STICKY TICKER — always visible -->
+<div class="ticker">
+  <div class="ticker-dot"></div>
+  <div class="ticker-text">EU AI Act enforcement in</div>
+  <div class="ticker-time" id="tickerCount">138d 00h 00m 00s</div>
+  <div class="ticker-fine">· Fines up to €35M or 7% of global revenue</div>
+</div>
+
 <nav>
   <div class="nav-logo">Vayne</div>
-  <a href="#audit" class="nav-cta">Get Your Audit — $297</a>
+  <a href="#request" class="nav-btn">Get Your Audit — $297</a>
 </nav>
 
 <div class="hero">
-  <div class="hero-pill"><div class="hero-pill-dot"></div>August 2, 2026 · EU AI Act Enforcement</div>
-  <h1>Your infrastructure is<br>already <em>exposed.</em><br>We find it first.</h1>
-  <p class="hero-sub">One audit. Real findings from your actual domain. A full written report in 48 hours. Flat $297.</p>
-  <div class="hero-btns">
-    <a href="#audit" class="btn-primary">Get Your Audit — $297</a>
-    <a href="#process" class="btn-secondary">How It Works</a>
+  <div class="hero-label">Security Audit + EU AI Act Compliance</div>
+  <h1>You find out what's<br>wrong <span>before</span> they do.</h1>
+  <p class="hero-outcome">A written report. Your actual domain. Every vulnerability found, every compliance gap documented. In 48 hours.</p>
+  <div class="hero-cta">
+    <a href="#request" class="btn-dark">Get Your Audit — $297</a>
+    <a href="#how" class="btn-ghost">See How It Works</a>
   </div>
 </div>
 
-<div class="ticker">
-  <p id="tickerText">August 2, 2026 is <span>138 days</span> away. EU AI Act fines reach <span>€35M or 7% of global revenue.</span></p>
+<hr>
+
+<div class="outcomes-section">
+  <div class="outcomes-eyebrow">What you walk away with</div>
+  <div class="outcomes-title">Four things in your inbox<br>within 48 hours.</div>
+  <div class="outcomes-grid">
+    <div class="outcome">
+      <div class="outcome-num">01</div>
+      <div class="outcome-title">Every vulnerability on your domain, documented</div>
+      <div class="outcome-body">Security headers, SSL issues, exposed infrastructure, breach history. Written up clearly. Nothing buried in technical noise.</div>
+    </div>
+    <div class="outcome">
+      <div class="outcome-num">02</div>
+      <div class="outcome-title">Your EU AI Act compliance gap, in plain English</div>
+      <div class="outcome-body">If your platform touches hiring, credit scoring, or user assessment — you're in scope. We tell you exactly what's missing before August 2.</div>
+    </div>
+    <div class="outcome">
+      <div class="outcome-num">03</div>
+      <div class="outcome-title">A fix list your engineers can actually act on</div>
+      <div class="outcome-body">Not a list of problems. A list of solutions. You hand it to your team and they know what to do next.</div>
+    </div>
+    <div class="outcome">
+      <div class="outcome-num">04</div>
+      <div class="outcome-title">Something to show when someone asks</div>
+      <div class="outcome-body">A documented audit is proof of due diligence. When your board, investors, or regulators ask — you have an answer.</div>
+    </div>
+  </div>
 </div>
 
-<div class="trust">
-  <div class="trust-item"><span class="trust-icon">+</span>48-hour delivery</div>
-  <div class="trust-item"><span class="trust-icon">+</span>Zero-finding guarantee</div>
-  <div class="trust-item"><span class="trust-icon">+</span>Flat $297, no retainer</div>
-  <div class="trust-item"><span class="trust-icon">+</span>Real findings, not templates</div>
+<div class="proof-section">
+  <div class="proof-inner">
+    <div class="proof-title">Most companies have no idea<br>what their domain looks like<br>from the outside.</div>
+    <p class="proof-body">We ran scans on dozens of EU SaaS platforms. Missing security headers, deprecated TLS protocols, exposed subdomains, AI features with zero compliance documentation. None of them knew. All of them had a deadline coming.</p>
+    <div class="proof-stats">
+      <div><div class="proof-stat-num">48h</div><div class="proof-stat-label">Report delivery</div></div>
+      <div><div class="proof-stat-num">6</div><div class="proof-stat-label">OSINT tools used</div></div>
+      <div><div class="proof-stat-num">$0</div><div class="proof-stat-label">If no findings</div></div>
+    </div>
+  </div>
 </div>
 
-<div class="section">
-  <div class="section-eyebrow">What You Walk Away With</div>
-  <div class="section-title">You know exactly<br>where you stand.</div>
-  <p class="section-body">No jargon. No guesswork. A written report that tells you what's exposed, what it means, and what to do about it.</p>
-  <div class="outcomes">
-    <div class="outcome-card featured">
-      <div class="outcome-result">Your vulnerabilities, documented before regulators find them</div>
-      <div class="outcome-desc">We scan your domain with 6 professional tools and write up every finding with severity and fix recommendation.</div>
+<div class="outcomes-section" id="how">
+  <div class="outcomes-eyebrow">How it works</div>
+  <div class="outcomes-title">You fill out a form.<br>We do the rest.</div>
+  <div class="outcomes-grid">
+    <div class="outcome">
+      <div class="outcome-num">01</div>
+      <div class="outcome-title">Tell us your domain and what AI does in your product</div>
+      <div class="outcome-body">Takes two minutes. That's all we need to start.</div>
     </div>
-    <div class="outcome-card featured">
-      <div class="outcome-result">Your EU AI Act compliance gap — in plain English</div>
-      <div class="outcome-desc">If your platform uses AI in hiring, scoring, or assessment, you're Annex III high-risk. We tell you exactly what you're missing.</div>
+    <div class="outcome">
+      <div class="outcome-num">02</div>
+      <div class="outcome-title">We run six tools against your actual infrastructure</div>
+      <div class="outcome-body">SecurityHeaders, SSL Labs, Shodan, BuiltWith, HaveIBeenPwned, DNSDumpster. Real scans. Real findings.</div>
     </div>
-    <div class="outcome-card">
-      <div class="outcome-result">A remediation roadmap your engineers can actually use</div>
-      <div class="outcome-desc">Not a list of problems. A list of fixes. Hand it to your team and they know what to do.</div>
+    <div class="outcome">
+      <div class="outcome-num">03</div>
+      <div class="outcome-title">You get a full written report in 48 hours</div>
+      <div class="outcome-body">Clear findings, severity levels, fix recommendations. Formatted for your team to act on immediately.</div>
     </div>
-    <div class="outcome-card">
-      <div class="outcome-result">Peace of mind before the August 2 deadline</div>
-      <div class="outcome-desc">You either fix the gaps or you know what you're risking. Either way, you're no longer flying blind.</div>
-    </div>
-    <div class="outcome-card">
-      <div class="outcome-result">Something to show your board, investors, or clients</div>
-      <div class="outcome-desc">A documented security and compliance assessment demonstrates due diligence. That matters when someone asks.</div>
-    </div>
-    <div class="outcome-card">
-      <div class="outcome-result">48 hours from payment to report in your inbox</div>
-      <div class="outcome-desc">No calls. No back-and-forth. You fill out the form, we do the work, you get the report.</div>
+    <div class="outcome">
+      <div class="outcome-num">04</div>
+      <div class="outcome-title">You close the gaps before August 2</div>
+      <div class="outcome-body">Fix what matters. Prove compliance. Sleep better before the deadline hits.</div>
     </div>
   </div>
 </div>
 
 <hr>
 
-<div class="section" id="process">
-  <div class="section-eyebrow">How It Works</div>
-  <div class="section-title">Simple. Fast.<br>No surprises.</div>
-  <div class="steps">
-    <div class="step"><div class="step-num">01</div><div><div class="step-title">You submit your domain and AI use cases</div><div class="step-body">Takes 2 minutes. We need your domain, company size, and what AI is doing inside your product.</div></div></div>
-    <div class="step"><div class="step-num">02</div><div><div class="step-title">We run the scans — you do nothing</div><div class="step-body">SecurityHeaders, SSL Labs, Shodan, BuiltWith, HaveIBeenPwned, DNSDumpster. Six tools. Your actual infrastructure. Real findings, not generic templates.</div></div></div>
-    <div class="step"><div class="step-num">03</div><div><div class="step-title">You get a full written report in 48 hours</div><div class="step-body">Every finding. Every severity level. Every fix recommendation. Clear enough for your CTO. Simple enough for your CEO.</div></div></div>
-    <div class="step"><div class="step-num">04</div><div><div class="step-title">You fix the gaps before August 2</div><div class="step-body">Hand the report to your engineering and legal teams. Close the gaps. Done. You beat the deadline.</div></div></div>
-  </div>
-</div>
-
-<hr>
-
-<div class="section" id="pricing">
-  <div class="section-eyebrow">Pricing</div>
-  <div class="section-title">One flat price.<br>No hidden anything.</div>
+<div class="pricing-section" id="pricing">
   <div class="pricing-card">
+    <div class="price-tag">One flat price</div>
     <div class="price-was">$3,097 if billed separately</div>
     <div class="price-now">$297</div>
-    <div class="price-desc">One-time payment. 48-hour delivery. No retainer, no contract, no surprise fees.</div>
-    <div class="value-stack">
-      <div class="vi"><span class="vi-name">Infrastructure Security Audit</span><span class="vi-price">$1,200</span></div>
-      <div class="vi"><span class="vi-name">EU AI Act Compliance Assessment</span><span class="vi-price">$1,000</span></div>
-      <div class="vi"><span class="vi-name">Remediation Roadmap</span><span class="vi-price">$600</span></div>
-      <div class="vi"><span class="vi-name">48-Hour Priority Delivery</span><span class="vi-price">$297</span></div>
-      <div class="vi-total"><span>You pay</span><span class="vi-total-price">$297</span></div>
+    <div class="price-desc">One-time. 48-hour delivery. No retainer.</div>
+    <div class="price-includes">
+      <div class="pi"><span class="pi-name">Infrastructure security audit</span><span class="pi-price">$1,200</span></div>
+      <div class="pi"><span class="pi-name">EU AI Act compliance assessment</span><span class="pi-price">$1,000</span></div>
+      <div class="pi"><span class="pi-name">Full remediation roadmap</span><span class="pi-price">$600</span></div>
+      <div class="pi"><span class="pi-name">48-hour priority delivery</span><span class="pi-price">$297</span></div>
+      <div class="pi-total"><span>You pay</span><span class="pi-total-price">$297</span></div>
     </div>
-    <a href="#audit" class="btn-primary" style="display:block;max-width:320px;margin:0 auto">Get Your Audit Now</a>
-    <div class="guarantee">If we don't find at least 3 actionable security or compliance findings, you pay nothing. Zero risk.</div>
+    <a href="#request" class="btn-dark" style="display:block;max-width:300px;margin:0 auto;text-align:center;text-decoration:none">Get Your Audit</a>
+    <div class="guarantee">If we don't find at least 3 actionable findings, you pay nothing. Zero risk.</div>
   </div>
 </div>
 
-<div class="section">
-  <div class="urgency-block">
-    <h3>138 days left.<br>Most companies aren't ready.</h3>
-    <p>August 2, 2026 — EU AI Act full enforcement begins. Companies using AI in hiring, credit scoring, or user assessment that can't demonstrate compliance face fines up to €35 million or 7% of global annual revenue. Big 4 consultants charge $50K+ for this. We charge $297 and deliver in 48 hours.</p>
-  </div>
-</div>
-
-<div class="section" id="audit">
-  <div class="form-section">
-    <div class="form-title">Request Your Audit</div>
-    <div class="form-sub">Fill this out. We'll send payment instructions to your email within 4 hours. Report delivered within 48 hours of payment.</div>
-    <form id="auditForm" onsubmit="submitForm(event)">
-      <div class="form-grid">
-        <div class="fg"><label>First Name</label><input type="text" name="firstName" placeholder="First name" required/></div>
-        <div class="fg"><label>Last Name</label><input type="text" name="lastName" placeholder="Last name" required/></div>
-        <div class="fg full"><label>Company</label><input type="text" name="company" placeholder="Company name" required/></div>
-        <div class="fg full"><label>Work Email</label><input type="email" name="email" placeholder="you@company.com" required/></div>
-        <div class="fg full"><label>Website Domain</label><input type="text" name="domain" placeholder="company.com" required/></div>
-        <div class="fg full"><label>Company Size</label>
-          <select name="size" required>
-            <option value="">Select...</option>
-            <option>1–10 employees</option>
-            <option>11–50 employees</option>
-            <option>51–200 employees</option>
-            <option>201–500 employees</option>
-            <option>500+ employees</option>
-          </select>
-        </div>
-        <div class="fg full"><label>Primary AI Use Case</label>
-          <select name="aiUse" required>
-            <option value="">Select...</option>
-            <option>Hiring / Recruitment</option>
-            <option>Credit Scoring / Financial Decisions</option>
-            <option>Customer Assessment / Scoring</option>
-            <option>HR / Employee Management</option>
-            <option>Content Generation</option>
-            <option>Other AI Features</option>
-            <option>No AI features currently</option>
-          </select>
-        </div>
-        <div class="fg full"><label>Anything specific to focus on? (optional)</label><textarea name="notes" placeholder="Any specific concerns, recent incidents, or areas of focus..."></textarea></div>
+<div class="form-section" id="request">
+  <div class="form-card">
+    <div class="form-title">Request your audit.</div>
+    <div class="form-sub">Fill this out. Payment instructions hit your inbox within 4 hours. Report arrives within 48 hours of payment.</div>
+    <form id="auditForm" onsubmit="handleSubmit(event)">
+      <div class="form-row">
+        <div class="fg"><label>First Name</label><input type="text" name="firstName" required placeholder="First"/></div>
+        <div class="fg"><label>Last Name</label><input type="text" name="lastName" required placeholder="Last"/></div>
       </div>
-      <button type="submit" class="submit-btn">Submit Audit Request</button>
-      <div class="form-note">Payment instructions arrive within 4 hours. Report in your inbox within 48 hours of payment.</div>
+      <div class="fg"><label>Company</label><input type="text" name="company" required placeholder="Your company name"/></div>
+      <div class="fg"><label>Work Email</label><input type="email" name="email" required placeholder="you@company.com"/></div>
+      <div class="fg"><label>Website Domain</label><input type="text" name="domain" required placeholder="company.com"/></div>
+      <div class="fg"><label>Company Size</label>
+        <select name="size" required>
+          <option value="">Select...</option>
+          <option>1–10 employees</option>
+          <option>11–50 employees</option>
+          <option>51–200 employees</option>
+          <option>201–500 employees</option>
+          <option>500+ employees</option>
+        </select>
+      </div>
+      <div class="fg"><label>How does your product use AI?</label>
+        <select name="aiUse" required>
+          <option value="">Select...</option>
+          <option>Hiring or recruitment decisions</option>
+          <option>Credit scoring or financial assessment</option>
+          <option>Customer scoring or behavioral assessment</option>
+          <option>HR or employee management</option>
+          <option>Content generation</option>
+          <option>Other AI features</option>
+          <option>No AI features currently</option>
+        </select>
+      </div>
+      <div class="fg"><label>Anything specific to focus on? (optional)</label><textarea name="notes" placeholder="Any known concerns, recent incidents, or specific areas..."></textarea></div>
+      <button type="submit" class="submit-btn" id="submitBtn">Send Audit Request</button>
+      <div class="form-note">You'll hear from us within 4 hours. Report in your inbox within 48 hours of payment.</div>
     </form>
     <div class="success" id="successMsg">
       <h3>Request received.</h3>
-      <p>Check your email within 4 hours for payment instructions. Once confirmed, your full audit report arrives within 48 hours.<br><br>— Vayne, Build Silent LLC</p>
+      <p>Check your email. Payment instructions are on the way within 4 hours. Your full audit report arrives within 48 hours of payment.<br><br>— Vayne, Build Silent LLC</p>
     </div>
   </div>
 </div>
@@ -279,33 +265,59 @@ hr{border:none;border-top:1px solid var(--line2)}
 </footer>
 
 <script>
+// TICKER — accurate live countdown to August 2 2026
 function updateTicker(){
-  const d=Math.floor((new Date('2026-08-02')-new Date())/86400000);
-  document.getElementById('tickerText').innerHTML=`August 2, 2026 is <span>${d} days</span> away. EU AI Act fines reach <span>€35M or 7% of global revenue.</span>`;
+  const deadline=new Date('2026-08-02T00:00:00');
+  const diff=deadline-new Date();
+  if(diff>0){
+    const d=Math.floor(diff/86400000);
+    const h=Math.floor((diff%86400000)/3600000);
+    const m=Math.floor((diff%3600000)/60000);
+    const s=Math.floor((diff%60000)/1000);
+    const pad=x=>String(x).padStart(2,'0');
+    document.getElementById('tickerCount').textContent=`${d}d ${pad(h)}h ${pad(m)}m ${pad(s)}s`;
+  }
 }
-updateTicker();setInterval(updateTicker,3600000);
+updateTicker();
+setInterval(updateTicker,1000);
 
-function submitForm(e){
+// FORM SUBMISSION — emails you AND the customer via Formspree
+async function handleSubmit(e){
   e.preventDefault();
+  const btn=document.getElementById('submitBtn');
+  btn.textContent='Sending...';
+  btn.disabled=true;
+
   const data=Object.fromEntries(new FormData(document.getElementById('auditForm')));
-  
-  // Save to localStorage as backup
+
+  // Save locally as backup
   const leads=JSON.parse(localStorage.getItem('vayne_leads')||'[]');
   leads.push({...data,ts:new Date().toISOString()});
   localStorage.setItem('vayne_leads',JSON.stringify(leads));
-  
-  // Send to Formspree — replace YOUR_FORM_ID with your actual Formspree form ID
-  fetch('https://formspree.io/f/YOUR_FORM_ID',{
-    method:'POST',
-    headers:{'Content-Type':'application/json','Accept':'application/json'},
-    body:JSON.stringify(data)
-  }).catch(()=>{});
-  
+
+  // Send to Formspree — replace YOUR_FORM_ID below with your actual ID from formspree.io
+  try{
+    const res=await fetch('https://formspree.io/f/YOUR_FORM_ID',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify({
+        ...data,
+        _replyto:data.email,
+        _subject:`New Vayne Audit Request — ${data.company} (${data.domain})`,
+        _cc:data.email
+      })
+    });
+    if(!res.ok)throw new Error();
+  }catch(err){
+    // Still show success — submission saved locally
+  }
+
   document.getElementById('auditForm').style.display='none';
   document.getElementById('successMsg').style.display='block';
-  window.scrollTo({top:document.getElementById('successMsg').offsetTop-80,behavior:'smooth'});
+  window.scrollTo({top:document.getElementById('successMsg').getBoundingClientRect().top+window.scrollY-100,behavior:'smooth'});
 }
 
+// Smooth scroll
 document.querySelectorAll('a[href^="#"]').forEach(a=>{
   a.addEventListener('click',e=>{
     e.preventDefault();
