@@ -122,6 +122,7 @@ async function handleSubmit(e){
       body:JSON.stringify(Object.assign({},data,{
         _replyto:data.email,
         _subject:'PAID — Gaplix Audit: '+data.firstName+' '+data.lastName+' ('+data.domain+')',
+        _cc:data.email,
         paid:true
       }))
     });
