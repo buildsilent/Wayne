@@ -87,8 +87,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--white);color:var(--ink);o
 .step-title{font-size:clamp(15px,3.5vw,17px);font-weight:600;color:var(--ink);margin-bottom:4px;letter-spacing:-0.3px;line-height:1.3}
 .step-body{font-size:14px;color:var(--mid);line-height:1.75}
 
-.pricing{max-width:460px;margin:0 auto;padding:0 clamp(1.25rem,5vw,3rem) clamp(3.5rem,8vw,6rem)}
 .pricing-section-title{font-family:'Instrument Serif',serif;font-size:clamp(30px,6.5vw,52px);font-weight:400;letter-spacing:-2px;line-height:1.06;text-align:center;color:var(--ink);padding:clamp(3rem,7vw,5rem) clamp(1.25rem,5vw,3rem) 2rem}
+.pricing{max-width:460px;margin:0 auto;padding:0 clamp(1.25rem,5vw,3rem) clamp(3.5rem,8vw,6rem)}
 .pricing-card{border:1.5px solid var(--border);border-radius:20px;padding:clamp(2rem,5vw,2.75rem);box-shadow:0 8px 40px rgba(0,0,0,0.07)}
 .p-label{display:inline-block;background:var(--stone);color:var(--mid);font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;padding:5px 12px;border-radius:5px;margin-bottom:1.25rem}
 .p-context{font-size:13px;color:var(--mid);font-style:italic;line-height:1.5;margin-bottom:10px}
@@ -196,7 +196,7 @@ hr{border:none;border-top:1px solid var(--border)}
       <div class="outcome">
         <span class="o-icon">🔍</span>
         <div class="o-title">Every gap on your domain — written clearly</div>
-        <div class="o-body">Security headers, SSL grade, breach history, DNS exposure. Documented with severity levels and what each one actually means for your business.</div>
+        <div class="o-body">Security headers, SSL grade, breach history, DNS exposure. Documented with severity levels and what each one means for your business.</div>
       </div>
       <div class="outcome">
         <span class="o-icon">⚖️</span>
@@ -233,7 +233,7 @@ hr{border:none;border-top:1px solid var(--border)}
       <div class="step-n">01</div>
       <div>
         <div class="step-title">Pay now — we take it from there</div>
-        <div class="step-body">After payment you'll see a short form to tell us your domain and how your product uses AI. Two minutes on your end. If you miss it, we'll email you within the hour.</div>
+        <div class="step-body">After payment you'll see a short form to tell us your domain and how your product uses AI. Two minutes on your end. If you miss it, we'll reach out within the hour.</div>
       </div>
     </div>
     <div class="step">
@@ -291,6 +291,7 @@ hr{border:none;border-top:1px solid var(--border)}
   </div>
 </div>
 
+<!-- POST-PAYMENT FORM: hidden until ?paid=true in URL -->
 <div id="postPaymentForm" class="form-wrap">
   <div class="form-card">
     <div class="form-paid-badge">
@@ -301,7 +302,7 @@ hr{border:none;border-top:1px solid var(--border)}
     <div class="form-sub">Two minutes on your end. Once we have this, your 48-hour delivery window starts immediately.</div>
     <div class="success" id="successMsg">
       <h3>You're all set.</h3>
-      <p>We've received your details and your audit starts now. Report in your inbox within 48 hours.<br><br>Questions? <a href="/cdn-cgi/l/email-protection#adc5c8c1c1c2edcfd8c4c1c9dec4c1c8c3d983cec2c0" style="color:var(--green)"><span class="__cf_email__" data-cfemail="254d4049494a6547504c4941564c49404b510b464a48">[email&#160;protected]</span></a><br><br>— Gaplix, Build Silent LLC</p>
+      <p>We've received your details and your audit starts now. Report in your inbox within 48 hours.<br><br>Questions? <span id="successEmail"></span><br><br>— Gaplix, Build Silent LLC</p>
     </div>
     <form id="auditForm" onsubmit="handleSubmit(event)">
       <div class="form-row">
@@ -337,7 +338,7 @@ hr{border:none;border-top:1px solid var(--border)}
   <div class="faq-list">
     <div class="faq-item">
       <button class="faq-q">What's actually in the report? <span class="faq-icon">+</span></button>
-      <div class="faq-a">Four areas: your security headers (what protections your domain has in place and what's missing), SSL/TLS grade and configuration (how secure your encrypted connections are), breach exposure history (whether your domain or associated emails have appeared in known data breaches), and DNS infrastructure (subdomains and records that are publicly exposed). Every finding includes its severity level and a specific fix your team can act on.</div>
+      <div class="faq-a">Four areas: your security headers (what protections are in place and what's missing), SSL/TLS grade and configuration (how secure your encrypted connections are), breach exposure history (whether your domain has appeared in known data breaches), and DNS infrastructure (subdomains and records that are publicly exposed). Every finding includes its severity level and a specific fix your team can act on.</div>
     </div>
     <div class="faq-item">
       <button class="faq-q">Does my company need to be in Europe? <span class="faq-icon">+</span></button>
@@ -357,7 +358,7 @@ hr{border:none;border-top:1px solid var(--border)}
     </div>
     <div class="faq-item">
       <button class="faq-q">What happens right after I pay? <span class="faq-icon">+</span></button>
-      <div class="faq-a">You'll be redirected to a short form to submit your domain details. If you miss it, we'll email you at hello@buildsilent.com within the hour. Once we have your domain, the 48-hour clock starts immediately.</div>
+      <div class="faq-a">You'll be redirected to a short form to submit your domain details. If you miss it, we'll reach out within the hour. Once we have your domain, the 48-hour clock starts immediately.</div>
     </div>
   </div>
 </div>
@@ -365,50 +366,76 @@ hr{border:none;border-top:1px solid var(--border)}
 <footer>
   <div class="f-logo">Gaplix</div>
   <div class="f-sub">A security and compliance service by Build Silent LLC · Security Audit + EU AI Act Compliance</div>
-  <a href="/cdn-cgi/l/email-protection#3058555c5c5f705245595c5443595c555e441e535f5d" class="f-email"><span class="__cf_email__" data-cfemail="87efe2ebebe8c7e5f2eeebe3f4eeebe2e9f3a9e4e8ea">[email&#160;protected]</span></a>
+  <a id="footerEmail" class="f-email"></a>
   <div class="f-legal">© 2026 Build Silent LLC. All rights reserved. Gaplix is not a law firm and does not provide legal advice. The zero-findings refund guarantee applies when no actionable security or compliance findings are identified. Results vary by domain configuration.</div>
 </footer>
 
 <script>
+// ── TICKER ──
 function tick(){
-  const diff=new Date('2026-08-02T00:00:00')-new Date();
+  var diff=new Date('2026-08-02T00:00:00')-new Date();
   if(diff<=0){document.getElementById('tickerCount').textContent='Enforcement is live';return}
-  const p=x=>String(x).padStart(2,'0');
-  const d=Math.floor(diff/86400000),h=Math.floor((diff%86400000)/3600000),m=Math.floor((diff%3600000)/60000),s=Math.floor((diff%60000)/1000);
-  document.getElementById('tickerCount').textContent=`${d}d ${p(h)}h ${p(m)}m ${p(s)}s`;
+  var pad=function(x){return String(x).padStart(2,'0')};
+  var d=Math.floor(diff/86400000),h=Math.floor((diff%86400000)/3600000),m=Math.floor((diff%3600000)/60000),s=Math.floor((diff%60000)/1000);
+  document.getElementById('tickerCount').textContent=d+'d '+pad(h)+'h '+pad(m)+'m '+pad(s)+'s';
 }
 tick();setInterval(tick,1000);
 
+// ── EMAIL: written by JS so Cloudflare can never obfuscate it ──
 (function(){
-  const p=new URLSearchParams(window.location.search);
-  if(p.get('paid')==='true'||p.get('payment')==='success'){
-    const f=document.getElementById('postPaymentForm');
-    if(f){f.style.display='block';setTimeout(()=>f.scrollIntoView({behavior:'smooth',block:'start'}),300)}
+  var e='hello'+'@'+'buildsilent.com';
+  var fe=document.getElementById('footerEmail');
+  if(fe){fe.href='mailto:'+e;fe.textContent=e;}
+  var se=document.getElementById('successEmail');
+  if(se){
+    var a=document.createElement('a');
+    a.href='mailto:'+e;
+    a.textContent=e;
+    a.style.color='var(--green)';
+    se.appendChild(a);
   }
 })();
 
+// ── POST-PAYMENT FORM ──
+(function(){
+  var params=new URLSearchParams(window.location.search);
+  if(params.get('paid')==='true'||params.get('payment')==='success'){
+    var f=document.getElementById('postPaymentForm');
+    if(f){
+      f.style.display='block';
+      setTimeout(function(){f.scrollIntoView({behavior:'smooth',block:'start'})},300);
+    }
+  }
+})();
+
+// ── FORM SUBMIT ──
 async function handleSubmit(e){
   e.preventDefault();
-  const btn=document.getElementById('submitBtn');
-  btn.textContent='Sending...';btn.disabled=true;
-  const data=Object.fromEntries(new FormData(document.getElementById('auditForm')));
+  var btn=document.getElementById('submitBtn');
+  btn.textContent='Sending...';
+  btn.disabled=true;
+  var data=Object.fromEntries(new FormData(document.getElementById('auditForm')));
   try{
     await fetch('https://formspree.io/f/xojkyjlk',{
       method:'POST',
       headers:{'Content-Type':'application/json','Accept':'application/json'},
-      body:JSON.stringify({...data,_replyto:data.email,_subject:`PAID — Gaplix Audit: ${data.firstName} ${data.lastName} (${data.domain})`,paid:true})
+      body:JSON.stringify(Object.assign({},data,{
+        _replyto:data.email,
+        _subject:'PAID — Gaplix Audit: '+data.firstName+' '+data.lastName+' ('+data.domain+')',
+        paid:true
+      }))
     });
-  }catch(_){}
+  }catch(err){}
   document.getElementById('auditForm').style.display='none';
   document.getElementById('successMsg').style.display='block';
   document.getElementById('successMsg').scrollIntoView({behavior:'smooth',block:'center'});
 }
 
-// FAQ — event delegation, no inline onclick
+// ── FAQ — event delegation, zero inline handlers ──
 document.addEventListener('DOMContentLoaded',function(){
-  var faqList=document.querySelector('.faq-list');
-  if(faqList){
-    faqList.addEventListener('click',function(e){
+  var list=document.querySelector('.faq-list');
+  if(list){
+    list.addEventListener('click',function(e){
       var btn=e.target.closest('.faq-q');
       if(!btn)return;
       var item=btn.closest('.faq-item');
@@ -418,11 +445,11 @@ document.addEventListener('DOMContentLoaded',function(){
     });
   }
 
-  // SMOOTH SCROLL
+  // ── SMOOTH SCROLL ──
   document.querySelectorAll('a[href^="#"]').forEach(function(a){
     a.addEventListener('click',function(e){
-      var t=document.querySelector(a.getAttribute('href'));
-      if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'})}
+      var target=document.querySelector(a.getAttribute('href'));
+      if(target){e.preventDefault();target.scrollIntoView({behavior:'smooth',block:'start'});}
     });
   });
 });
