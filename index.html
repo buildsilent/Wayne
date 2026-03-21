@@ -454,5 +454,16 @@ document.addEventListener('DOMContentLoaded',function(){
   });
 });
 </script>
+<canvas id="particles" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;"></canvas>
+<script>
+const c=document.getElementById('particles');
+const ctx=c.getContext('2d');
+let particles=[];
+c.width=window.innerWidth;c.height=window.innerHeight;
+window.addEventListener('resize',()=>{c.width=window.innerWidth;c.height=window.innerHeight;});
+class P{constructor(x,y){this.x=x;this.y=y;this.vx=(Math.random()-0.5)*2;this.vy=(Math.random()-0.5)*2-1.5;this.life=1;this.decay=Math.random()*0.02+0.015;this.size=Math.random()*3+1;const h=Math.floor(Math.random()*60+200);this.color=`hsl(${h},80%,70%)`;}update(){this.x+=this.vx;this.y+=this.vy;this.vy+=0.04;this.life-=this.decay;this.size*=0.97;}draw(){ctx.save();ctx.globalAlpha=Math.max(0,this.life)*0.8;ctx.fillStyle=this.color;ctx.shadowColor=this.color;ctx.shadowBlur=8;ctx.beginPath();ctx.arc(this.x,this.y,this.size,0,Math.PI*2);ctx.fill();ctx.restore();}}
+document.addEventListener('mousemove',e=>{for(let i=0;i<4;i++)particles.push(new P(e.clientX,e.clientY));});
+(function loop(){ctx.clearRect(0,0,c.width,c.height);particles=particles.filter(p=>p.life>0);particles.forEach(p=>{p.update();p.draw();});requestAnimationFrame(loop);})();
+</script>
 </body>
 </html>
