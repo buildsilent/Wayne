@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gaplix — Website Security Audit for Local Businesses</title>
+<meta name="description" content="Your customers trust you with their information. We find out if your website is protecting it. Plain English report. 48 hours. $297.">
+<meta property="og:title" content="Gaplix — Website Security Audit for Local Businesses">
+<meta property="og:description" content="We scan your website, find every security problem, and tell you exactly how to fix it. No jargon. $297. 48 hours.">
+<meta property="og:url" content="https://gaplix.com/local">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0d0d0d;--white:#fff;--cream:#faf9f7;--stone:#f0efe9;--border:#e2e0d8;
+  --mid:#737370;--warm-red:#c8321e;--warm-red-bg:#fdf2f0;--warm-red-border:rgba(200,50,30,0.15);
+  --blue:#1a4fa0;--green:#166534;--green-bg:#f0fdf4;--green-border:#bbf7d0;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--white);color:var(--ink);overflow-x:hidden}
+
+.ticker{background:var(--ink);padding:9px 20px;display:flex;align-items:center;justify-content:center;gap:10px;position:sticky;top:0;z-index:300}
+.t-dot{width:6px;height:6px;border-radius:50%;background:#e05a4a;flex-shrink:0;animation:blink 1.6s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.15}}
+.t-text{font-size:12px;color:rgba(255,255,255,0.45);white-space:nowrap}
+.t-stat{font-size:13px;color:#ff8a7a;font-weight:700;letter-spacing:-0.2px;white-space:nowrap}
+
+.nav{height:56px;padding:0 clamp(1.25rem,5vw,3rem);display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,0.94);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);position:sticky;top:34px;z-index:200}
+.nav-logo{font-family:'Instrument Serif',serif;font-size:22px;color:var(--ink);letter-spacing:-0.3px;text-decoration:none}
+.nav-cta{padding:9px 22px;background:var(--ink);color:var(--white);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;border:none;border-radius:7px;cursor:pointer;text-decoration:none;transition:opacity 0.18s;white-space:nowrap}
+.nav-cta:hover{opacity:0.78}
+
+.hero{max-width:860px;margin:0 auto;padding:clamp(4rem,9vw,7rem) clamp(1.25rem,5vw,3rem) clamp(3rem,7vw,5rem);text-align:center}
+.hero-kicker{display:inline-block;font-size:12px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:var(--warm-red);margin-bottom:1.75rem}
+.hero h1{font-family:'Instrument Serif',serif;font-size:clamp(44px,9.5vw,90px);font-weight:400;letter-spacing:-3px;line-height:0.95;color:var(--ink);margin-bottom:1.5rem}
+.hero h1 em{font-style:italic;color:var(--warm-red)}
+.hero-lead{font-size:clamp(17px,3.8vw,21px);color:var(--mid);font-weight:400;line-height:1.65;max-width:520px;margin:0 auto 2.5rem}
+
+.audit-counter{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:1.25rem;flex-wrap:wrap}
+.ac-num{font-size:clamp(28px,6vw,42px);font-weight:700;color:var(--ink);letter-spacing:-2px;line-height:1;font-variant-numeric:tabular-nums}
+.ac-label{font-size:clamp(12px,3vw,14px);color:var(--mid);font-weight:400;line-height:1.4;text-align:left}
+.ac-label strong{display:block;color:var(--ink);font-weight:600;font-size:clamp(13px,3.2vw,15px)}
+.ac-divider{width:1px;height:36px;background:var(--border);flex-shrink:0}
+
+.hero-cta-group{display:flex;flex-direction:column;align-items:center;gap:10px}
+.btn-pay{padding:17px 40px;background:var(--ink);color:var(--white);font-family:'DM Sans',sans-serif;font-size:clamp(15px,3.5vw,17px);font-weight:700;border:none;border-radius:9px;cursor:pointer;text-decoration:none;display:inline-block;letter-spacing:-0.2px;transition:opacity 0.18s,transform 0.15s;box-shadow:0 4px 24px rgba(13,13,13,0.18)}
+.btn-pay:hover{opacity:0.82;transform:translateY(-2px)}
+.hero-sub{font-size:13px;color:var(--mid)}
+.hero-sub strong{color:var(--green);font-weight:600}
+
+.proof-bar{background:var(--stone);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:16px clamp(1.25rem,5vw,3rem);display:flex;justify-content:center;align-items:center;gap:clamp(1.5rem,5vw,4rem);flex-wrap:wrap}
+.proof-item{display:flex;align-items:center;gap:8px;font-size:13px;color:#3a3a36;font-weight:500}
+.proof-dot{width:5px;height:5px;border-radius:50%;background:var(--green);flex-shrink:0}
+
+.human{max-width:740px;margin:0 auto;padding:clamp(3.5rem,8vw,6rem) clamp(1.25rem,5vw,3rem);text-align:center}
+.human h2{font-family:'Instrument Serif',serif;font-size:clamp(30px,6.5vw,54px);font-weight:400;letter-spacing:-2px;line-height:1.08;margin-bottom:1.5rem;color:var(--ink)}
+.human h2 em{font-style:italic}
+.human p{font-size:clamp(16px,3.5vw,19px);color:var(--mid);line-height:1.8;max-width:600px;margin:0 auto 1rem}
+.human p strong{color:var(--ink);font-weight:600}
+
+.outcomes{background:var(--ink);padding:clamp(3.5rem,8vw,6rem) clamp(1.25rem,5vw,3rem)}
+.outcomes-inner{max-width:880px;margin:0 auto}
+.outcomes-label{font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.3);text-align:center;margin-bottom:2.5rem}
+.outcomes-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.08);border-radius:16px;overflow:hidden}
+.outcome{padding:2rem 1.75rem;background:var(--ink);transition:background 0.2s}
+.outcome:hover{background:#161616}
+.o-icon{font-size:28px;margin-bottom:1rem;display:block}
+.o-title{font-family:'Instrument Serif',serif;font-size:clamp(18px,4vw,22px);color:var(--white);letter-spacing:-0.5px;line-height:1.2;margin-bottom:10px}
+.o-body{font-size:13px;color:rgba(255,255,255,0.38);line-height:1.75}
+
+.guarantee-section{background:var(--green-bg);border-top:1px solid var(--green-border);border-bottom:1px solid var(--green-border);padding:clamp(3rem,7vw,5rem) clamp(1.25rem,5vw,3rem);text-align:center}
+.guarantee-inner{max-width:600px;margin:0 auto}
+.guarantee-icon{font-size:44px;margin-bottom:1rem;display:block}
+.guarantee-section h2{font-family:'Instrument Serif',serif;font-size:clamp(28px,6vw,48px);font-weight:400;letter-spacing:-1.5px;line-height:1.1;color:var(--green);margin-bottom:1rem}
+.guarantee-section p{font-size:clamp(15px,3.5vw,18px);color:#3a5c40;line-height:1.75}
+
+.hiw{max-width:680px;margin:0 auto;padding:clamp(3.5rem,8vw,6rem) clamp(1.25rem,5vw,3rem)}
+.section-label{font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--blue);text-align:center;margin-bottom:10px}
+.section-title{font-family:'Instrument Serif',serif;font-size:clamp(30px,6.5vw,52px);font-weight:400;letter-spacing:-2px;line-height:1.06;text-align:center;margin-bottom:clamp(2rem,5vw,3.5rem);color:var(--ink)}
+.step-list{display:grid;gap:0}
+.step{display:flex;gap:1.5rem;align-items:flex-start;padding:1.5rem 0;border-bottom:1px solid var(--border)}
+.step:last-child{border-bottom:none}
+.step-n{font-family:'Instrument Serif',serif;font-size:clamp(32px,6vw,44px);color:var(--border);line-height:1;flex-shrink:0;width:44px;letter-spacing:-2px}
+.step-title{font-size:clamp(15px,3.5vw,17px);font-weight:600;color:var(--ink);margin-bottom:4px;letter-spacing:-0.3px;line-height:1.3}
+.step-body{font-size:14px;color:var(--mid);line-height:1.75}
+
+.who{max-width:740px;margin:0 auto;padding:clamp(3.5rem,8vw,6rem) clamp(1.25rem,5vw,3rem);text-align:center}
+.who-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:2rem;max-width:540px;margin-left:auto;margin-right:auto}
+@media(max-width:480px){.who-grid{grid-template-columns:1fr}}
+.who-chip{font-size:14px;color:var(--mid);padding:14px 18px;background:var(--cream);border:1px solid var(--border);border-radius:10px;text-align:left}
+.who-chip strong{color:var(--ink);font-weight:600}
+
+.pricing-wrap{padding:clamp(3.5rem,8vw,6rem) clamp(1.25rem,5vw,3rem)}
+.pricing-grid{max-width:960px;margin:0 auto;display:grid;grid-template-columns:1fr;gap:16px}
+@media(min-width:760px){.pricing-grid{grid-template-columns:1fr 1fr 1fr}}
+.pcard{border:1.5px solid var(--border);border-radius:20px;padding:clamp(1.75rem,4vw,2.25rem);box-shadow:0 4px 20px rgba(0,0,0,0.04);display:flex;flex-direction:column;position:relative}
+.pcard.pop{border-color:var(--ink);box-shadow:0 8px 40px rgba(0,0,0,0.1)}
+.pcard.pop::before{content:'Most popular';position:absolute;top:-12px;left:50%;transform:translateX(-50%);font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;background:var(--ink);color:var(--white);padding:5px 14px;border-radius:6px;white-space:nowrap}
+.pcard-label{display:inline-block;background:var(--stone);color:var(--mid);font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;padding:5px 12px;border-radius:5px;margin-bottom:1rem;width:fit-content}
+.pcard-price{font-family:'Instrument Serif',serif;font-size:clamp(48px,10vw,72px);letter-spacing:-3px;line-height:1;color:var(--ink);margin-bottom:4px}
+.pcard-freq{font-size:12px;color:var(--mid);margin-bottom:1.25rem}
+.pcard-desc{font-size:14px;color:var(--mid);line-height:1.75;flex-grow:1;margin-bottom:1.5rem}
+.pcard-btn{display:block;width:100%;padding:15px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:700;border:none;border-radius:9px;cursor:pointer;text-decoration:none;text-align:center;letter-spacing:-0.2px;transition:opacity 0.18s,transform 0.15s}
+.pcard-btn.primary{background:var(--ink);color:var(--white);box-shadow:0 4px 20px rgba(0,0,0,0.14)}
+.pcard-btn.primary:hover{opacity:0.82;transform:translateY(-1px)}
+.pcard-btn.outline{background:transparent;color:var(--ink);border:1.5px solid var(--border)}
+.pcard-btn.outline:hover{border-color:var(--ink)}
+.pcard-note{font-size:11px;color:#b0b0a8;text-align:center;margin-top:10px;line-height:1.6}
+.pcard-guarantee{font-size:12px;color:var(--mid);margin-top:1rem;padding:10px 14px;background:var(--green-bg);border-radius:8px;line-height:1.6;text-align:center;border:1px solid var(--green-border)}
+.pcard-guarantee strong{color:var(--green)}
+
+/* Bundle toggle */
+.bundle-toggle{display:flex;background:var(--stone);border-radius:8px;padding:3px;margin-bottom:1.25rem;position:relative}
+.bundle-opt{flex:1;text-align:center;padding:9px 12px;font-size:13px;font-weight:600;color:var(--mid);cursor:pointer;border-radius:6px;transition:all 0.2s;position:relative;z-index:1;user-select:none}
+.bundle-opt.active{color:var(--ink);background:var(--white);box-shadow:0 1px 4px rgba(0,0,0,0.1)}
+.bundle-price-row{display:flex;align-items:baseline;gap:6px;margin-bottom:4px}
+.bundle-plus{font-size:14px;color:var(--mid);font-weight:400;margin-bottom:1.25rem}
+
+.urgency{background:var(--warm-red-bg);border-top:1px solid var(--warm-red-border);border-bottom:1px solid var(--warm-red-border);padding:clamp(3rem,7vw,5rem) clamp(1.25rem,5vw,3rem);text-align:center}
+.urgency-inner{max-width:600px;margin:0 auto}
+.urgency h2{font-family:'Instrument Serif',serif;font-size:clamp(30px,6.5vw,54px);font-weight:400;letter-spacing:-2px;line-height:1.05;color:var(--ink);margin-bottom:1rem}
+.urgency h2 em{font-style:italic;color:var(--warm-red)}
+.urgency p{font-size:clamp(15px,3.5vw,17px);color:#4a3a38;line-height:1.8;margin-bottom:2rem}
+
+/* Post-payment form */
+#postPaymentForm{display:none}
+.form-wrap{max-width:520px;margin:0 auto;padding:clamp(3rem,7vw,5.5rem) clamp(1.25rem,5vw,3rem)}
+.form-card{border:1.5px solid var(--border);border-radius:18px;padding:clamp(2rem,5vw,2.75rem);box-shadow:0 4px 20px rgba(0,0,0,0.05)}
+.form-paid-badge{display:inline-flex;align-items:center;gap:7px;background:var(--green-bg);border:1px solid var(--green-border);color:var(--green);font-size:11px;font-weight:700;letter-spacing:0.7px;text-transform:uppercase;padding:5px 13px;border-radius:6px;margin-bottom:1.25rem}
+.form-title{font-family:'Instrument Serif',serif;font-size:clamp(24px,5.5vw,36px);font-weight:400;letter-spacing:-1px;color:var(--ink);margin-bottom:6px;line-height:1.1}
+.form-sub{font-size:14px;color:var(--mid);margin-bottom:1.75rem;line-height:1.7}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:480px){.form-row{grid-template-columns:1fr}}
+.fg{display:flex;flex-direction:column;gap:5px;margin-bottom:10px}
+.fg label{font-size:10px;font-weight:700;letter-spacing:0.6px;color:#b0b0a8;text-transform:uppercase}
+input,select,textarea{background:var(--stone);border:1.5px solid transparent;border-radius:9px;color:var(--ink);font-family:'DM Sans',sans-serif;font-size:15px;padding:12px 14px;width:100%;outline:none;transition:border-color 0.18s,background 0.18s;-webkit-appearance:none}
+input:focus,select:focus,textarea:focus{background:var(--white);border-color:var(--ink)}
+textarea{min-height:80px;resize:none}
+.form-btn{width:100%;padding:15px;background:var(--ink);color:var(--white);font-family:'DM Sans',sans-serif;font-size:16px;font-weight:700;border:none;border-radius:9px;cursor:pointer;margin-top:6px;letter-spacing:-0.2px;transition:opacity 0.18s}
+.form-btn:hover{opacity:0.8}
+.form-btn:disabled{opacity:0.35;cursor:not-allowed}
+.form-note{font-size:11px;color:#b8b8b0;margin-top:10px;text-align:center;line-height:1.65}
+.success{display:none;text-align:center;padding:2.25rem 2rem;background:var(--green-bg);border-radius:14px;border:1px solid var(--green-border)}
+.success h3{font-family:'Instrument Serif',serif;font-size:clamp(22px,5vw,28px);color:var(--green);letter-spacing:-0.5px;margin-bottom:8px}
+.success p{font-size:14px;color:#3a5c40;line-height:1.75}
+
+.faq{max-width:640px;margin:0 auto;padding:clamp(3rem,7vw,5rem) clamp(1.25rem,5vw,3rem)}
+.faq-list{display:grid;gap:6px;margin-top:2rem}
+.faq-item{border:1px solid var(--border);border-radius:12px;overflow:hidden;background:var(--cream)}
+.faq-q{width:100%;text-align:left;background:transparent;border:none;padding:1rem 1.25rem;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;color:var(--ink);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;letter-spacing:-0.2px}
+.faq-q:hover{background:var(--stone)}
+.faq-icon{font-size:18px;color:var(--mid);flex-shrink:0;transition:transform 0.2s;line-height:1}
+.faq-a{display:none;padding:0 1.25rem 1rem;font-size:14px;color:var(--mid);line-height:1.75}
+.faq-item.open .faq-icon{transform:rotate(45deg)}
+.faq-item.open .faq-a{display:block}
+
+footer{border-top:1px solid var(--border);padding:2.25rem clamp(1.25rem,5vw,3rem);text-align:center;background:var(--cream)}
+.f-logo{font-family:'Instrument Serif',serif;font-size:20px;color:var(--ink);margin-bottom:6px}
+.f-sub{font-size:11px;color:#b0b0a8;margin-bottom:8px;line-height:1.65}
+.f-email{font-size:13px;color:var(--blue);text-decoration:none;font-weight:500}
+.f-email:hover{text-decoration:underline}
+.f-legal{font-size:10px;color:#c8c8c0;margin-top:12px;line-height:1.65;max-width:540px;margin-left:auto;margin-right:auto}
+hr{border:none;border-top:1px solid var(--border)}
+</style>
+</head>
+<body>
+
+<div class="ticker">
+  <div class="t-dot"></div>
+  <span class="t-text">9 out of 10 small business websites we scan&nbsp;</span>
+  <span class="t-stat">have security gaps the owner doesn't know about</span>
+</div>
+
+<nav class="nav">
+  <a href="https://gaplix.com" class="nav-logo">Gaplix</a>
+  <a href="#pricing" class="nav-cta">Get Your Audit — $297</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-kicker">Security Audits for Local Businesses</div>
+  <h1>Your customers trust you.<br><em>Is your website protecting them?</em></h1>
+  <p class="hero-lead">One written report. Your actual domain. Every vulnerability found, every fix spelled out — delivered in 48 hours for $297.</p>
+  <div class="audit-counter">
+    <div><span class="ac-num">34</span></div>
+    <div class="ac-divider"></div>
+    <div class="ac-label"><strong>Audits completed</strong>Critical findings in every single one</div>
+  </div>
+  <div class="hero-cta-group">
+    <a href="https://buy.stripe.com/9B6dRa5nnfdk3Gx7vAgMw02" class="btn-pay" target="_blank" rel="noopener">Get My Audit — $297</a>
+    <span class="hero-sub"><strong>Zero-risk guarantee</strong> — if we don't find anything, you don't pay anything</span>
+  </div>
+</div>
+
+<div class="proof-bar">
+  <div class="proof-item"><div class="proof-dot"></div>Report in 48 hours</div>
+  <div class="proof-item"><div class="proof-dot"></div>Your live domain — not a checklist</div>
+  <div class="proof-item"><div class="proof-dot"></div>No retainer. No contract.</div>
+  <div class="proof-item"><div class="proof-dot"></div>$0 if we find nothing</div>
+</div>
+
+<div class="human">
+  <h2>You didn't build this business to worry about <em>security headers.</em></h2>
+  <p>You're running a practice, a firm, an agency. Somewhere between serving clients and keeping the lights on — <strong>the website security stuff got pushed to "later."</strong></p>
+  <p>That's not negligence. That's what running a business looks like.</p>
+  <p>But your customers' data doesn't wait for "later." If your website collects names, emails, phone numbers, or payment info — and the protections aren't there — <strong>you're exposed right now.</strong> Gaplix finds out exactly where you stand before it becomes someone else's discovery.</p>
+</div>
+
+<div class="outcomes">
+  <div class="outcomes-inner">
+    <div class="outcomes-label">What lands in your inbox</div>
+    <div class="outcomes-grid">
+      <div class="outcome">
+        <span class="o-icon"></span>
+        <div class="o-title">Every gap on your site — written clearly</div>
+        <div class="o-body">Security headers, SSL grade, server exposure, cookie configuration. Documented with severity levels and what each one means for your business in plain English.</div>
+      </div>
+      <div class="outcome">
+        <span class="o-icon"></span>
+        <div class="o-title">What's at risk for your customers</div>
+        <div class="o-body">Not what the problem IS technically — what it means for the people trusting you with their information. What data is exposed. What could happen if it stays unfixed.</div>
+      </div>
+      <div class="outcome">
+        <span class="o-icon"></span>
+        <div class="o-title">A fix list anyone can act on</div>
+        <div class="o-body">Priority ordered. Which fixes you handle yourself, which need your hosting provider, which need a developer. Hand it to whoever manages your site — they'll know exactly where to start.</div>
+      </div>
+      <div class="outcome">
+        <span class="o-icon"></span>
+        <div class="o-title">Proof you took action</div>
+        <div class="o-body">When a client, insurer, or regulator asks what you've done about website security — you hand them this document. Most businesses your size don't have one. Now you do.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="guarantee-section">
+  <div class="guarantee-inner">
+    <span class="guarantee-icon"></span>
+    <h2>If we don't find anything,<br>you don't pay anything.</h2>
+    <p>We've scanned dozens of small business websites. Every single one had at least one critical gap the owner didn't know about. We're confident enough to put our money behind it. If your site comes back clean — full refund, no questions asked.</p>
+  </div>
+</div>
+
+<div class="hiw" id="how">
+  <div class="section-label">How it works</div>
+  <div class="section-title">Three steps.<br>48 hours.</div>
+  <div class="step-list">
+    <div class="step"><div class="step-n">01</div><div><div class="step-title">Pay now — we take it from there</div><div class="step-body">After payment, tell us your domain name and what kind of business you run. Two minutes on your end. If you forget, we'll reach out within the hour.</div></div></div>
+    <div class="step"><div class="step-n">02</div><div><div class="step-title">We scan every layer of your live site</div><div class="step-body">Security headers, SSL/TLS encryption, server configuration, cookie settings, and compliance posture. Every scan runs against your actual domain — not a template.</div></div></div>
+    <div class="step"><div class="step-n">03</div><div><div class="step-title">Your report arrives within 48 hours</div><div class="step-body">Every finding, every severity level, every fix — written so you or your web person can act on it without asking follow-up questions. That's it. Gaps closed.</div></div></div>
+  </div>
+</div>
+
+<div class="who">
+  <div class="section-label">Who this is for</div>
+  <div class="section-title">Built for businesses that handle<br>sensitive data.</div>
+  <div class="who-grid">
+    <div class="who-chip"><strong>Dental practices</strong> &amp; clinics</div>
+    <div class="who-chip"><strong>Law firms</strong> &amp; attorneys</div>
+    <div class="who-chip"><strong>CPA firms</strong> &amp; accountants</div>
+    <div class="who-chip"><strong>Real estate</strong> agencies</div>
+    <div class="who-chip"><strong>Insurance</strong> agencies</div>
+    <div class="who-chip"><strong>Staffing</strong> &amp; recruiting</div>
+    <div class="who-chip"><strong>Home services</strong> with online booking</div>
+    <div class="who-chip"><strong>Any business</strong> with a contact form</div>
+  </div>
+</div>
+
+<hr>
+
+<div class="pricing-wrap" id="pricing">
+  <div class="section-label">Pricing</div>
+  <div class="section-title">Pick what fits.<br>Every option delivers results.</div>
+  <div class="pricing-grid">
+
+    <!-- CARD 1: $297 Audit Only -->
+    <div class="pcard">
+      <div class="pcard-label">Security Audit</div>
+      <div class="pcard-price">$297</div>
+      <div class="pcard-freq">One-time · 48-hour delivery</div>
+      <div class="pcard-desc">Complete scan of your website. Every finding documented in plain English with exact fix instructions and severity ratings. Hand it to your web person on Monday morning.</div>
+      <a href="https://buy.stripe.com/9B6dRa5nnfdk3Gx7vAgMw02" class="pcard-btn outline" target="_blank" rel="noopener">Get the Audit — $297</a>
+      <div class="pcard-guarantee"><strong>Zero-risk:</strong> If we don't find anything, you don't pay anything.</div>
+    </div>
+
+    <!-- CARD 2: $497 Audit + Fix -->
+    <div class="pcard pop">
+      <div class="pcard-label">Audit + We Fix Everything</div>
+      <div class="pcard-price">$497</div>
+      <div class="pcard-freq">One-time · We handle it all</div>
+      <div class="pcard-desc">Full audit plus we implement every fix for you. Security headers, SSL configuration, server hardening, cookie flags — all of it. You don't touch a thing. You just get a secure site back.</div>
+      <a href="https://buy.stripe.com/00w3cw6rre9gb8Z5nsgMw03" class="pcard-btn primary" target="_blank" rel="noopener">Get Audit + Fixes — $497</a>
+      <div class="pcard-guarantee"><strong>Zero-risk:</strong> If we don't find anything, you don't pay anything.</div>
+    </div>
+
+    <!-- CARD 3: Bundle with toggle -->
+    <div class="pcard">
+      <div class="pcard-label">Audit + Monthly Monitoring</div>
+      <div class="bundle-toggle">
+        <div class="bundle-opt active" data-tier="297">$297 + monitoring</div>
+        <div class="bundle-opt" data-tier="497">$497 + monitoring</div>
+      </div>
+      <div id="bundlePrice" class="pcard-price">$297</div>
+      <div class="bundle-plus">then $97/mo starting 30 days later</div>
+      <div class="pcard-desc" id="bundleDesc">Full security audit today, plus we scan your site every month going forward. If anything changes — a new vulnerability, an expired certificate, a configuration drift — we catch it before someone else does.</div>
+      <a href="https://buy.stripe.com/7sYdRaeXX9T02Ct5nsgMw04" class="pcard-btn outline" target="_blank" rel="noopener" id="bundleBtn">Get Audit + Monitoring</a>
+      <div class="pcard-note">$97/mo auto-bills 30 days after purchase. Cancel anytime.</div>
+    </div>
+
+  </div>
+</div>
+
+<div class="urgency">
+  <div class="urgency-inner">
+    <h2>Find out what's exposed<br><em>before someone else does.</em></h2>
+    <p>A data breach costs small businesses an average of $120,000. A compliance fine costs more. A security audit costs $297 and takes 48 hours. You already know what the right call is.</p>
+    <a href="https://buy.stripe.com/9B6dRa5nnfdk3Gx7vAgMw02" class="btn-pay" style="text-decoration:none" target="_blank" rel="noopener">Get My Audit — $297</a>
+  </div>
+</div>
+
+<!-- POST-PAYMENT FORM: hidden until ?paid=true -->
+<div id="postPaymentForm" class="form-wrap">
+  <div class="form-card">
+    <div class="form-paid-badge">
+      <svg viewBox="0 0 10 8" width="10" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1,4 3.5,6.5 9,1"/></svg>
+      Payment confirmed
+    </div>
+    <div class="form-title">Now tell us about your domain.</div>
+    <div class="form-sub">Two minutes on your end. Once we have this, your 48-hour delivery window starts immediately.</div>
+    <div class="success" id="successMsg">
+      <h3>You're all set.</h3>
+      <p>We've received your details and your audit starts now. Report in your inbox within 48 hours.<br><br>Questions? <span id="successEmail"></span><br><br>— Gaplix, Build Silent LLC</p>
+    </div>
+    <form id="auditForm" onsubmit="handleSubmit(event)">
+      <div class="form-row">
+        <div class="fg"><label>First Name</label><input type="text" name="firstName" required placeholder="First"/></div>
+        <div class="fg"><label>Last Name</label><input type="text" name="lastName" required placeholder="Last"/></div>
+      </div>
+      <div class="fg"><label>Work Email</label><input type="email" name="email" required placeholder="you@company.com"/></div>
+      <div class="fg"><label>Website Domain</label><input type="text" name="domain" required placeholder="yourbusiness.com"/></div>
+      <div class="fg"><label>What kind of business do you run?</label>
+        <select name="businessType" required>
+          <option value="">Select the closest option...</option>
+          <option>Dental practice or medical clinic</option>
+          <option>Law firm or legal practice</option>
+          <option>CPA firm or accounting</option>
+          <option>Real estate agency</option>
+          <option>Insurance agency</option>
+          <option>Staffing or recruiting agency</option>
+          <option>Home services (plumber, HVAC, electrician, etc.)</option>
+          <option>Restaurant or food service</option>
+          <option>Salon, spa, or wellness</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="fg"><label>Anything specific you want us to focus on? (optional)</label>
+        <textarea name="notes" placeholder="Recent concerns, known issues, areas to prioritize..."></textarea>
+      </div>
+      <button type="submit" class="form-btn" id="submitBtn">Submit — Start My Audit</button>
+      <div class="form-note">We begin immediately after receiving this.</div>
+    </form>
+  </div>
+</div>
+
+<div class="faq" id="faq">
+  <div class="section-label">Questions</div>
+  <div class="section-title">Straight answers.</div>
+  <div class="faq-list">
+    <div class="faq-item"><button class="faq-q">What's actually in the report? <span class="faq-icon">+</span></button><div class="faq-a">Your security headers (what protections are in place and what's missing), SSL/TLS grade (how secure your encrypted connections are), server configuration (what information you're exposing), and cookie settings (whether customer session data is protected). Every finding includes a severity level, a plain English explanation, and a specific fix.</div></div>
+    <div class="faq-item"><button class="faq-q">Do I need to give you access to anything? <span class="faq-icon">+</span></button><div class="faq-a">No. We only scan what's publicly visible — the same things any visitor or attacker can see. No passwords, no hosting login, no server access. Just your domain name and what kind of business you run.</div></div>
+    <div class="faq-item"><button class="faq-q">I already have an IT person. <span class="faq-icon">+</span></button><div class="faq-a">This report makes their job easier. It's a prioritized checklist of exactly what to fix and in what order. Most IT teams appreciate having a third-party audit to reference. Think of it as a second opinion that saves them research time.</div></div>
+    <div class="faq-item"><button class="faq-q">Is $297 actually worth it? <span class="faq-icon">+</span></button><div class="faq-a">The scan takes 20 minutes. The report takes a full day — every finding explained in plain English with specific fix instructions, severity ratings, and who should handle each one. Big 4 consultants charge $15,000–$50,000 for the same scope. This is the full diagnostic with the repair plan included.</div></div>
+    <div class="faq-item"><button class="faq-q">What if I want you to just fix everything? <span class="faq-icon">+</span></button><div class="faq-a">That's the $497 option. We do the full audit and then implement every fix ourselves — security headers, SSL configuration, server hardening, cookie flags, all of it. You don't touch a thing. Most fixes take us a few hours and your site comes back fully secured.</div></div>
+    <div class="faq-item"><button class="faq-q">What does monthly monitoring include? <span class="faq-icon">+</span></button><div class="faq-a">Every month we re-scan your entire site and send a one-page report. If anything changed — a new vulnerability, a certificate about to expire, a misconfiguration introduced by a plugin update — we flag it immediately. You don't wonder if something slipped through. We're watching it for you.</div></div>
+    <div class="faq-item"><button class="faq-q">My site doesn't collect sensitive data though. <span class="faq-icon">+</span></button><div class="faq-a">Does it have a contact form? An email signup? Any login page? All of those collect personal information that's protected under privacy laws. Even a simple form with name, phone number, and email address counts as personally identifiable information.</div></div>
+    <div class="faq-item"><button class="faq-q">Can I verify your findings myself? <span class="faq-icon">+</span></button><div class="faq-a">Yes. Every tool we use is free and public — securityheaders.com and ssllabs.com. We save you the time of running the tests, interpreting the results, and figuring out what to do about each one.</div></div>
+    <div class="faq-item"><button class="faq-q">Do I need to get on a phone call? <span class="faq-icon">+</span></button><div class="faq-a">No. Everything is handled over email. That's how we keep the price at $297 instead of $2,000+. Full report delivered to your inbox, questions answered by email. No scheduling. No waiting on hold.</div></div>
+  </div>
+</div>
+
+<footer>
+  <div class="f-logo">Gaplix</div>
+  <div class="f-sub">A security service by Build Silent LLC · Website Security Audits for Local Businesses</div>
+  <a id="footerEmail" class="f-email"></a>
+  <div class="f-legal">© 2026 Build Silent LLC. All rights reserved. Gaplix is not a law firm and does not provide legal advice. The zero-findings refund guarantee applies when no actionable security findings are identified. Results vary by domain configuration.</div>
+</footer>
+
+<script>
+// Email (JS so Cloudflare can't obfuscate)
+(function(){
+  var e='hello'+'@'+'buildsilent.com';
+  var fe=document.getElementById('footerEmail');
+  if(fe){fe.href='mailto:'+e;fe.textContent=e;}
+  var se=document.getElementById('successEmail');
+  if(se){var a=document.createElement('a');a.href='mailto:'+e;a.textContent=e;a.style.color='var(--green)';se.appendChild(a);}
+})();
+
+// Bundle toggle
+(function(){
+  var opts=document.querySelectorAll('.bundle-opt');
+  var price=document.getElementById('bundlePrice');
+  var desc=document.getElementById('bundleDesc');
+  var btn=document.getElementById('bundleBtn');
+  var links={'297':'https://buy.stripe.com/7sYdRaeXX9T02Ct5nsgMw04','497':'https://buy.stripe.com/4gMdRag211mu1yp2bggMw05'};
+  var descs={'297':'Full security audit today, plus we scan your site every month going forward. If anything changes — a new vulnerability, an expired certificate, a configuration drift — we catch it before someone else does.','497':'Full audit plus we implement every fix, then scan your site every month going forward. You get a secure site today and someone watching it for you every month after.'};
+  opts.forEach(function(o){
+    o.addEventListener('click',function(){
+      opts.forEach(function(x){x.classList.remove('active')});
+      o.classList.add('active');
+      var t=o.getAttribute('data-tier');
+      price.textContent='$'+t;
+      desc.textContent=descs[t];
+      btn.href=links[t];
+    });
+  });
+})();
+
+// Post-payment form
+(function(){
+  var params=new URLSearchParams(window.location.search);
+  if(params.get('paid')==='true'||params.get('payment')==='success'){
+    var f=document.getElementById('postPaymentForm');
+    if(f){f.style.display='block';setTimeout(function(){f.scrollIntoView({behavior:'smooth',block:'start'})},300);}
+  }
+})();
+
+// Form submit
+async function handleSubmit(e){
+  e.preventDefault();
+  var btn=document.getElementById('submitBtn');
+  btn.textContent='Sending...';btn.disabled=true;
+  var data=Object.fromEntries(new FormData(document.getElementById('auditForm')));
+  try{
+    await fetch('https://formspree.io/f/xojkyjlk',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify(Object.assign({},data,{
+        _replyto:data.email,
+        _subject:'PAID — Local Audit: '+data.firstName+' '+data.lastName+' ('+data.domain+')',
+        paid:true,source:'local'
+      }))
+    });
+  }catch(err){}
+  document.getElementById('auditForm').style.display='none';
+  document.getElementById('successMsg').style.display='block';
+  document.getElementById('successMsg').scrollIntoView({behavior:'smooth',block:'center'});
+}
+
+// FAQ
+document.addEventListener('DOMContentLoaded',function(){
+  var list=document.querySelector('.faq-list');
+  if(list){list.addEventListener('click',function(e){
+    var btn=e.target.closest('.faq-q');if(!btn)return;
+    var item=btn.closest('.faq-item');var isOpen=item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(function(i){i.classList.remove('open')});
+    if(!isOpen)item.classList.add('open');
+  });}
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){
+    a.addEventListener('click',function(e){
+      var target=document.querySelector(a.getAttribute('href'));
+      if(target){e.preventDefault();target.scrollIntoView({behavior:'smooth',block:'start'});}
+    });
+  });
+});
+</script>
+</body>
+</html>
